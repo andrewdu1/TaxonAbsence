@@ -11,7 +11,7 @@
 # function for the standard reflected beta-binomial pdf (eq. S6)
 # ARGUMENTS:
 # X: number of successes (# Paranthropus specimens)
-# n: number of trials (# total mammalIAN specimens)
+# n: number of trials (# total mammalian specimens)
 # lambda: shape parameter
 stdReflectBBpdf <- function(X, n, lambda){
   
@@ -54,10 +54,9 @@ Q <- function(X, n, psi, lambda){
 # ARGUMENTS:
 # X: number of successes (# Paranthropus specimens)
 # n: number of trials (# total mammalian specimens)
-# psi: parameter (unconditional probability that Z_i = 1)
 # lambda: standard reflected beta distribution shape parameter
 # tau_res: results from using the tau() function
-lambda_Mstep <- function(X, n, psi, lambda, tau_res){
+lambda_Mstep <- function(X, n, lambda, tau_res){
   
   dbetabinom <- stdReflectBBpdf(X, n, lambda)
   
@@ -111,7 +110,7 @@ EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
     if(!is.null(n.step.max)) if(length(Q.res) == n.step.max) break
   }
   
-  return(list(psi.res = psi.res, p_hat = psi.res[length(psi.res)], lambda.res = lambda.res, lambda_hat = lambda.res[length(lambda.res)], Q.res = Q.res))
+  return(list(psi.res = psi.res, psi_hat = psi.res[length(psi.res)], lambda.res = lambda.res, lambda_hat = lambda.res[length(lambda.res)], Q.res = Q.res))
 }
 
 # function for simulating number of Paranthropus specimens data with known psi and lambda
