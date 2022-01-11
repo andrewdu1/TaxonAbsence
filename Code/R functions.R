@@ -9,10 +9,10 @@
 
 
 # function for the standard reflected beta-binomial pdf (eq. S6)
-# ARGUMENTS:
-# X: number of successes (# Paranthropus specimens)
-# n: number of trials (# total mammalian specimens)
-# lambda: shape parameter
+  # ARGUMENTS:
+    # X: number of successes (# Paranthropus specimens)
+    # n: number of trials (# total mammalian specimens)
+    # lambda: shape parameter
 stdReflectBBpdf <- function(X, n, lambda){
   
   require(rmutil)
@@ -26,11 +26,11 @@ stdReflectBBpdf <- function(X, n, lambda){
 }
 
 # function for posterior probability that Z_i = 1, i.e., tau (eq. S10)
-# ARGUMENTS:
-# X: number of successes (# Paranthropus specimens)
-# n: number of trials (# total mammalian specimens)
-# psi: parameter (unconditional probability that Z_i = 1)
-# lambda: standard reflected beta distribution shape parameter
+  # ARGUMENTS:
+    # X: number of successes (# Paranthropus specimens)
+    # n: number of trials (# total mammalian specimens)
+    # psi: parameter (unconditional probability that Z_i = 1)
+    # lambda: standard reflected beta distribution shape parameter
 tau <- function(X, n, psi, lambda){
   
   dbetabinom <- stdReflectBBpdf(X, n, lambda)
@@ -39,8 +39,8 @@ tau <- function(X, n, psi, lambda){
 }
 
 # function for expected log-likelihood (eq. S11)
-# ARGUMENTS:
-# same as in tau() function
+  # ARGUMENTS:
+    # same as in tau() function
 Q <- function(X, n, psi, lambda){
   
   tau_res <- tau(X, n, psi, lambda)
@@ -51,12 +51,13 @@ Q <- function(X, n, psi, lambda){
 }
 
 # function for estimating lambda in the expected log-likelihood (eq. S11) (to be numerically solved)
-# ARGUMENTS:
-# X: number of successes (# Paranthropus specimens)
-# n: number of trials (# total mammalian specimens)
-# lambda: standard reflected beta distribution shape parameter
-# tau_res: results from using the tau() function
-lambda_Mstep <- function(X, n, lambda, tau_res){
+  # ARGUMENTS:
+    # X: number of successes (# Paranthropus specimens)
+    # n: number of trials (# total mammalian specimens)
+    # psi: parameter (unconditional probability that Z_i = 1)
+    # lambda: standard reflected beta distribution shape     parameter
+    # tau_res: results from using the tau() function
+lambda_Mstep <- function(X, n, psi, lambda, tau_res){
   
   dbetabinom <- stdReflectBBpdf(X, n, lambda)
   
@@ -64,12 +65,12 @@ lambda_Mstep <- function(X, n, lambda, tau_res){
 }
 
 # primary function for the EM algorithm
-# ARGUMENTS:
-# X: number of successes (# Paranthropus specimens)
-# n: number of trials (# total mammalian specimens)
-# psi.init: initial guess for psi
-# lambda.init: initial guess for lambda
-# n.step.max: number of maximum steps for the optimazation process. Only used for our simulations.
+  # ARGUMENTS:
+    # X: number of successes (# Paranthropus specimens)
+    # n: number of trials (# total mammalian specimens)
+    # psi.init: initial guess for psi
+    # lambda.init: initial guess for lambda
+    # n.step.max: number of maximum steps for the optimazation     process. Only used for our simulations.
 EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
   
   # step 1: calculate expected log-likelihood given initial guesses of psi and lambda
@@ -114,11 +115,11 @@ EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
 }
 
 # function for simulating number of Paranthropus specimens data with known psi and lambda
-# ARGUMENTS:
-# n_sites: number of sites
-# n_mammSpec: vector of number of total mammalian specimens from each site
-# psi: psi parameter (probability that a site truly has Paranthropus)
-# lambda: shape parameter for beta-binomial pdf
+  # ARGUMENTS:
+    # n_sites: number of sites
+    # n_mammSpec: vector of number of total mammalian specimens     from each site
+    # psi: psi parameter (probability that a site truly has     Paranthropus)
+    # lambda: shape parameter for beta-binomial pdf
 simulateData <- function(n_sites, n_mammSpec, psi, lambda){
   
   require(rmutil) # for simulating random draws from a beta-binomial distribution
