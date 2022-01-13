@@ -5,11 +5,11 @@
 ##########################################
 
 # Author: Andrew Du & Eric Friedlander
-# Date: 3-3-21
+# Date: 1-12-22
 
 
 # Source R functions
-source("Code/R functions.R")
+source("Code/1_R functions.R")
 
 # Read in data
 d <- read.csv("Datasets/NISP data.csv", header = TRUE)
