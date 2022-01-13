@@ -5,7 +5,7 @@
 #######################
 
 # Author: Andrew Du & Eric Friedlander
-# Date: 3-3-21
+# Date: 1-12-22
 
 
 # function for the standard reflected beta-binomial pdf (eq. S6)
