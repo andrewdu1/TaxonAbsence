@@ -5,14 +5,13 @@
 ##########################
 
 # Author: Andrew Du
-# Date: 3-3-21
+# Date: 1-12-22
 
 
 # Read in data & results
 d <- read.csv("Datasets/NISP data.csv", header = TRUE) # raw data
 
 EM.res <- readRDS("Results/EM results.rds") # EM results
-ci.boot <- readRDS("Results/Bootstrap CI results.rds") # bootstrapped CI results
 X_expect <- readRDS("Results/Expected freq dist Paran NISP.rds") # expected Paranthropus NISP frequency distribution
 
 # Source functions
@@ -24,7 +23,6 @@ n <- X + d$Non.paran.mamm.nisp # Total large mammalian abundance
 
 psi_hat <- EM.res$psi_hat # estimated psi parameter
 lambda_hat <- EM.res$lambda_hat # estimated lambda parameter
-lambda_ci <- quantile(ci.boot$lambda_boot, c(0.025, 0.975)) # 95% CI for lambda
 
 
 ### Fig. 2: Histogram of number of Paranthropus and large mammal specimens
@@ -55,15 +53,11 @@ x <- seq(0, 1, length.out = 100000)
 
 par(mfrow = c(2, 1), mar = c(4, 4.5, 2, 2) + 0.1)
 
-plot(x, dbeta(x, 1, 1 - lambda_hat), type = "l", lwd = 3, xlab = expression(italic(Paranthropus) * " sampling probability (" * italic(p[i]) * ")"), ylab = "Density", cex.axis = 1.5, cex.lab = 1.5, log = "x", xaxt = "n", ylim = c(0, 380))
-
-lines(x, dbeta(x, 1, 1 - lambda_ci[1]), lty = 2, lwd = 2)
-lines(x, dbeta(x, 1, 1 - lambda_ci[2]), lty = 2, lwd = 2)
+plot(x, dbeta(x, 1, 1 - lambda_hat), type = "l", lwd = 3, xlab = expression(italic(Paranthropus) * " sampling probability (" * italic(p[i]) * ")"), ylab = "Density", cex.axis = 1.5, cex.lab = 1.5, log = "x", xaxt = "n")
 
 axis(1, at = c(1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e0), labels = c("0.00001", "0.0001", "0.001", "0.01", "0.1", "1"), cex.axis = 1.5)
 
-text(0.002, 325, bquote(hat(lambda) == .(round(lambda_hat))), cex = 2, pos = 4)
-text(0.0017, 260, bquote( ~ "95% CI = (" * .(round(lambda_ci[1])) * "," ~ .(round(lambda_ci[2])) *")"), cex = 1.75, pos = 4)
+text(0.04, 130, bquote(hat(lambda) == .(round(lambda_hat))), cex = 2, pos = 4)
 
 mtext("A", at = 0.00001, cex = 2.5)
 
