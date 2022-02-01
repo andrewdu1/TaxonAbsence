@@ -25,6 +25,42 @@ psi_hat <- EM.res$psi_hat # estimated psi parameter
 lambda_hat <- EM.res$lambda_hat # estimated lambda parameter
 
 
+### Fig. 2: plot showing how different values of n, psi, and lambda influence the posterior probability, given X=0
+
+# define different n's
+n1 <- 100
+n2 <- 1000
+n3 <- 10000
+
+# define different psis & lambdas
+psi_contour <- seq(0, 1, length.out = 100)
+lambda_contour <- seq(-150, 0)
+
+# calculate posterior probabilities of absence
+tau1 <- tau2 <- tau3 <- matrix(nrow = length(psi_contour), ncol = length(lambda_contour)) # empty matrices to save results to
+
+for(i in seq_along(psi_contour)){
+  for(j in seq_along(lambda_contour)){
+    
+    tau1[i, j] <- 1 - tau(X = 0, n = n1, psi = psi_contour[i], lambda = lambda_contour[j])
+    
+    tau2[i, j] <- 1 - tau(X = 0, n = n2, psi = psi_contour[i], lambda = lambda_contour[j])
+    
+    tau3[i, j] <- 1 - tau(X = 0, n = n3, psi = psi_contour[i], lambda = lambda_contour[j])
+  }
+}
+
+# create plots
+library(ggplot2)
+
+
+
+
+
+
+filled.contour(x = psi_contour, y = lambda_contour, z = tau1, zlim = c(0, 1), color.palette = function(n) gray.colors(n, rev = TRUE), main = paste0("n = ", n1, " specimens"), xlab = expression(psi), ylab = expression(lambda), cex.main = 2, cex.lab = 1.5, cex.axis = 1.5)
+
+
 ### Fig. 2: Histogram of number of Paranthropus and large mammal specimens
 
 #pdf("Figures/Fig 2.pdf", height = 10)
