@@ -28,42 +28,49 @@ lambda_hat <- EM.res$lambda_hat # estimated lambda parameter
 ### Fig. 2: plot showing how different values of n, psi, and lambda influence the posterior probability, given X=0
 
 # define different n's
-n1 <- 100
-n2 <- 1000
-n3 <- 10000
+n_contour <- c(100, 1000, 10000)
 
 # define different psis & lambdas
 psi_contour <- seq(0, 1, length.out = 100)
 lambda_contour <- seq(-150, 0)
 
 # calculate posterior probabilities of absence
-tau1 <- tau2 <- tau3 <- matrix(nrow = length(psi_contour), ncol = length(lambda_contour)) # empty matrices to save results to
+tau_contour <- expand.grid(n_contour, psi_contour, lambda_contour)
+colnames(tau_contour) <- c("n", "psi", "lambda")
+tau_contour$tau <- array(NA, dim = nrow(tau_contour))
 
-for(i in seq_along(psi_contour)){
-  for(j in seq_along(lambda_contour)){
-    
-    tau1[i, j] <- 1 - tau(X = 0, n = n1, psi = psi_contour[i], lambda = lambda_contour[j])
-    
-    tau2[i, j] <- 1 - tau(X = 0, n = n2, psi = psi_contour[i], lambda = lambda_contour[j])
-    
-    tau3[i, j] <- 1 - tau(X = 0, n = n3, psi = psi_contour[i], lambda = lambda_contour[j])
-  }
-}
+for(i in seq_len(nrow(tau_contour))) tau_contour$tau[i] <- 1 - tau(X = 0, n = tau_contour$n[i], psi = tau_contour$psi[i], lambda = tau_contour$lambda[i])
 
-# create plots
+# create plot
 library(ggplot2)
 
+# change facet labels
+facet.lab <- c("100 specimens", "1,000 specimens", "10,000 specimens")
+names(facet.lab) <- n_contour
+
+#pdf("Figures/Fig 2.pdf", width = 12, height = 4)
+
+ggplot(data = tau_contour, aes(x = psi, y = lambda, z = tau)) + 
+  facet_grid(~n, labeller = labeller(n = facet.lab)) + 
+  theme_bw() + 
+  geom_contour_filled() +
+  scale_fill_grey(start = 0.8, end = 0.2) +
+  xlab(expression(psi)) +
+  ylab(expression(lambda)) +
+  labs(fill = "Posterior\nprobability") +
+  theme(strip.text.x = element_text(size = 20),
+        axis.title = element_text(size = 20),
+        axis.text = element_text(size = 15),
+        legend.title = element_text(size = 17),
+        legend.text = element_text(size = 15),
+        panel.spacing.x = unit(5, "mm"))
+
+#dev.off()
 
 
+### Fig. 3: Histogram of number of Paranthropus and large mammal specimens
 
-
-
-filled.contour(x = psi_contour, y = lambda_contour, z = tau1, zlim = c(0, 1), color.palette = function(n) gray.colors(n, rev = TRUE), main = paste0("n = ", n1, " specimens"), xlab = expression(psi), ylab = expression(lambda), cex.main = 2, cex.lab = 1.5, cex.axis = 1.5)
-
-
-### Fig. 2: Histogram of number of Paranthropus and large mammal specimens
-
-#pdf("Figures/Fig 2.pdf", height = 10)
+#pdf("Figures/Fig 3.pdf", height = 10)
 
 par(mfrow = c(3, 1), mar = c(4.1, 4.5, 3, 2) + 0.1)
 
@@ -82,10 +89,10 @@ mtext("C", at = 0, cex = 2.25)
 #dev.off()
 
 
-### Fig. 3: Probability density function of Paranthropus sampling probability (using lambda parameter)
+### Fig. 4: Probability density function of Paranthropus sampling probability (using lambda parameter)
 x <- seq(0, 1, length.out = 100000)
 
-#pdf("Figures/Fig 3.pdf", height = 10)
+#pdf("Figures/Fig 4.pdf", height = 10)
 
 par(mfrow = c(2, 1), mar = c(4, 4.5, 2, 2) + 0.1)
 
@@ -112,7 +119,7 @@ mtext("B", at = 0, cex = 2.5)
 #dev.off()
 
 
-### Fig. 4: Probability Paranthropus absence curve
+### Fig. 5: Probability Paranthropus absence curve
 n1 <- seq(0, 20000)
 
 tau0 <- tau(X = rep(0, length(n1)), n = n1, psi = psi_hat, lambda = lambda_hat) # get taus for sites where there's no Paranthropus and with increasing number of mammalian specimens
@@ -129,7 +136,7 @@ nisp_0.95 <- which(abs((1 - tau0) - 0.95) == min(abs((1 - tau0) - 0.95)))
 nisp_0.99 <- which(abs((1 - tau0) - 0.99) == min(abs((1 - tau0) - 0.99)))
 
 
-#pdf("Figures/Fig 4.pdf", height = 5)
+#pdf("Figures/Fig 5.pdf", height = 5)
 
 par(mar = c(5, 6.5, 4, 2) + 0.1, fig = c(0, 1, 0, 1))
 
