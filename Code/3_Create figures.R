@@ -18,8 +18,8 @@ X_expect <- readRDS("Results/Expected freq dist Paran NISP.rds") # expected Para
 source("Code/1_R functions.R")
 
 # Define objects
-X <- d$Paran.nisp # Paranthropus abundance
-n <- X + d$Non.paran.mamm.nisp # Total large mammalian abundance
+X <- d$Paran_nisp # Paranthropus abundance
+n <- X + d$NonParanMamm_nisp # Total large mammalian abundance
 
 psi_hat <- EM.res$psi_hat # estimated psi parameter
 lambda_hat <- EM.res$lambda_hat # estimated lambda parameter
