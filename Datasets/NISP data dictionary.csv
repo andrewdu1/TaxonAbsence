@@ -1,0 +1,14 @@
+Variable_name,Data_type,Data_range_min,Data_range_max,Definition
+Country,Text,NA,NA,Country where site is located
+Site_Formation,Text,NA,NA,Site name or formation name
+Locality,Text,NA,NA,Locality name. Localities are located within sites or formations
+Member,Text,NA,NA,Geological member wherein site is found
+Latitude,Decimal,-90,90,Site latitude in decimal degrees
+Longitude,Decimal,-180,180,Site longitude in decimal degrees
+MeanAge_Ma,Decimal,0,Inf,"Age of site (millions of years ago). For those sites with bracketing ages (e.g., dated under- and overlying tuffs), the mean of the two bracketing ages was used"
+Age_ref,Text,NA,NA,Citation of paper(s) where age data were found
+Paran_nisp,Integer,0,Inf,Number of Paranthropus specimens recovered at site
+NonParanMamm_nisp,Integer,0,Inf,Number of large mammalian specimens NOT from Paranthropus recovered at site
+Paran_ref,Text,NA,NA,Citation of paper(s) where Paranthropus NISP data were found
+Mamm_ref,Text,NA,NA,Citation of paper(s) where mammalian NISP data were found
+Notes,Text,NA,NA,"Miscellaneous notes on how data were collected. If cell is blank, no notes were recorded"
