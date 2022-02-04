@@ -15,8 +15,8 @@ source("Code/1_R functions.R")
 d <- read.csv("Datasets/NISP data.csv", header = TRUE)
 
 # Define objects
-X <- d$Paran.nisp # Paranthropus abundance
-n <- X + d$Non.paran.mamm.nisp # Total large mammalian abundance
+X <- d$Paran_nisp # Paranthropus abundance
+n <- X + d$NonParanMamm_nisp # Total large mammalian abundance
 
 # Fit model using expectation-maximization algorithm
 EM.res <- EM(X = X, n = n, psi.init = 0.5, lambda.init = -5)
@@ -28,7 +28,7 @@ lambda_hat <- EM.res$lambda_hat
 # Calculate posterior probabilities (prob. Paranthropus is truly absent given estimated parameters and data)
 tau_hat <- 1 - tau(X, n, psi_hat, lambda_hat)
 
-tau.df <- data.frame(site = paste(d$Site.Formation, d$Member, sep = "_"), tau_hat)
+tau.df <- data.frame(site = paste(d$Site_Formation, d$Member, sep = "_"), tau_hat)
 
 tau.df <- tau.df[tau.df$tau_hat > 0, ] # remove sites where Paranthropus is present
 
