@@ -89,7 +89,17 @@ EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
     # step 3: estimate new values of psi and lambda given new tau (M-step)
     psi.new <- mean(tau.res)
     
-    lambda.opt <- optim(par = lambda.new, fn = lambda_Mstep, gr = NULL, X = X, n = n, psi = psi.new, tau_res = tau.res, method = "L-BFGS-B", control = list(fnscale = -1), lower = -Inf, upper = 0)
+    lambda.opt <- optim(par = lambda.new, 
+                        fn = lambda_Mstep, 
+                        gr = NULL, 
+                        X = X, 
+                        n = n, 
+                        psi = psi.new, 
+                        tau_res = tau.res, 
+                        method = "L-BFGS-B", 
+                        control = list(fnscale = -1), 
+                        lower = -Inf, 
+                        upper = 0)
     
     lambda.new <- lambda.opt$par[1]
     
@@ -111,7 +121,11 @@ EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
     if(!is.null(n.step.max)) if(length(Q.res) == n.step.max) break
   }
   
-  return(list(psi.res = psi.res, psi_hat = psi.res[length(psi.res)], lambda.res = lambda.res, lambda_hat = lambda.res[length(lambda.res)], Q.res = Q.res))
+  return(list(psi.res = psi.res, 
+              psi_hat = psi.res[length(psi.res)], 
+              lambda.res = lambda.res, 
+              lambda_hat = lambda.res[length(lambda.res)], 
+              Q.res = Q.res))
 }
 
 # function for simulating number of Paranthropus specimens data with known psi and lambda
