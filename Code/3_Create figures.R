@@ -111,7 +111,7 @@ points(seq(0, 36), c(X_expect[seq(1, 36)], sum(X_expect[seq(37, length(X_expect)
 points(table(X), lwd = 3)
 points(36, sum(X >= 36), lwd = 3, type = "h") # number of sites with >= 36 Paranthropus NISP
 
-axis(1, at = seq(0, 36, 2), labels = c(seq(0, 34, 2), "\u226536"), cex.axis = 1.5) # \u2265 is unicode character for >=
+axis(1, at = seq(0, 36, 2), labels = c(seq(0, 34, 2), ">35"), cex.axis = 1.5)
 
 legend("topright", legend = c("Observed", "Expected"), lty = c(1, NA), pch = c(NA, 21), pt.bg = c(NA, "gray85"), pt.cex = c(NA, 2), pt.lwd = c(NA, 1), bty = "n", cex = 1.5, lwd = 3)
 
