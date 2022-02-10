@@ -109,7 +109,7 @@ plot(table(X), xlab = expression(italic(Paranthropus) ~ "NISP"), ylab = "Number 
 
 points(seq(0, 36), c(X_expect[seq(1, 36)], sum(X_expect[seq(37, length(X_expect))])), pch = 21, bg = "gray85", cex = 1.5) # the sum() sums expected number of sites with 36 or more Paranthropus NISP
 points(table(X), lwd = 3)
-points(36, sum(X >= 36), lwd = 3, type = "h") # number of sites with >= 36 Paranthropus NISP
+points(36, sum(X > 35), lwd = 3, type = "h") # number of sites with > 35 Paranthropus NISP
 
 axis(1, at = seq(0, 36, 2), labels = c(seq(0, 34, 2), ">35"), cex.axis = 1.5)
 
