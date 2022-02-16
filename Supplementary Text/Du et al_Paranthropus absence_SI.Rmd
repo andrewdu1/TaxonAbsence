@@ -1,0 +1,1053 @@
+---
+title: "Supplementary information for \"Placing probabilities on taxon true absence: applications to the hominin genus *Paranthropus*\"" 
+author: "Andrew Du, Eric Friedlander, John Rowan, Zeresenay Alemseged"
+output: 
+  pdf_document:
+      number_sections: true
+      toc : true
+bibliography: My Library.bib
+csl: journal-of-human-evolution.csl
+---
+
+# Detailed overview of the mixture model
+
+## Motivation
+
+While the methodology presented in this work is broadly applicable to any taxon, regarding the problem of inferring its absence across a collection of sites, we present the model using the example of the hominin genus *Paranthropus* from eastern Africa, as was done in the main text.
+Inferring whether *Paranthropus* was truly absent at a site is difficult because observed absence is consistent with two mutually exclusive outcomes: (A) *Paranthropus* never occupied the site, or (B) it did occupy the site but has not been sampled yet. 
+We are ultimately interested in estimating the probability of each of these two possibilities, conditional on not finding a *Paranthropus* specimen after sampling $n$ specimens at a given site. 
+To accomplish this, we propose a mixture model wherein each of the two outcomes is modeled with a different probability distribution called a *mixture component*. 
+As we will see, this model, along with Bayes' rule, will allow us to compute the probability that a given site was generated from possibility (A) or (B), conditional on sampling $n$ mammalian specimens without finding *Paranthropus*, and thus estimate the likelihood that *Paranthropus* was truly absent from a given site or has not been sampled yet. 
+
+
+## Derivation
+
+We now present the proposed model. 
+In order to instill intuition, we outline the model in a generative fashion (i.e., how data would be generated from the model). 
+Let $p$ be the probability that a given site belongs to component (B) (i.e., *Paranthropus* is present). 
+In particular, if one were to select a site uniformly at random (with no additional information about the recovered specimens), $p$ would represent the probability that *Paranthropus* was present.
+Intuitively, one can think of $p$ as the expected proportion of all sites that contains *Paranthropus*, regardless of whether it has been observed yet. 
+Thus, there is a single $p$ that needs to be specified for the model, which applies across all sites. 
+It follows that $1 - p$ is the probability that a site belongs to component (A) (i.e., *Paranthropus* was truly absent from the site). 
+
+For site $i$, let $Z_i$ be a latent (unobserved) variable that is equal to $1$ if *Paranthropus* was present and $0$ otherwise. 
+It follows that $P(Z_i = 1) = p$ and $P(Z_i = 0) = 1 - p$. 
+In the language of statistics, we say that $Z_i$ is a $Bernoulli(p)$ random variable and write:
+
+\begin{align} 
+    Z_i \sim Ber(p).  
+      \label{bernoulli}
+\end{align}
+
+For each value of $Z_i$ (i.e., 0 or 1), we must specify the distribution on the number of *Paranthropus* specimens that will be sampled if $n_i$ total mammalian specimens are collected. 
+In general, if we were to know the true relative abundance of *Paranthropus*, denoted $\pi_i$, then the sampling probabilities can be modeled using a $Binomial(n_i, \pi_i)$ distribution. 
+Using an example, a $Binomial(n,\pi)$ random variable represents the number of heads one may observe if flipping a weighted coin $n$ times, given that the probability of obtaining heads from a single flip is $\pi$. 
+In our setting, if we know that $\pi_i$ is the probability that a randomly chosen specimen from site $i$ will be *Paranthropus* (i.e., its true relative abundance), then the number of *Paranthropus* specimens out of $n_i$ mammalian specimens has a $Binomial(n_i, \pi_i)$ distribution.
+
+We now use the value of $Z_i$ to generate a value for $\pi_i$. 
+Recall that if $Z_i = 0$, then *Paranthropus* never occupied the $i$th site, so the probability that a sampled mammalian specimen is *Paranthropus* is zero (i.e., $\pi_i=0$). 
+This is the first mixture component in our model, and we say that there is a *point mass* at $0$ because all of the mass of the binomial distribution is concentrated at $0$ (i.e., if $\pi_i = 0$, then the number of sampled *Paranthropus* specimens must also equal $0$).
+If $Z_i = 1$, then *Paranthropus* did occupy the site. However, the true relative abundance of *Paranthropus* varies from site to site. 
+Therefore, we model $\pi_i$ using the standard reflected beta distribution [@wang_adaptive_2016], which has the probability density function $(1 - \lambda) (1 - \pi_i) ^ {-\lambda}$ if $\lambda\leq 0$. 
+There is a corresponding expression for the case $\lambda >0$, but we restrict ourselves to the case when $\lambda\leq 0$ for reasons that will soon become clear.
+The standard reflected beta distribution is simply a reparametrization of the standard beta distribution with parameters $\alpha = 1$ and $\beta = 1 - \lambda$, i.e., $Beta(1, 1 - \lambda)$. 
+The parameter $\lambda$ is the same across all sites, and it determines the shape of the distribution, which in our case ($\lambda \leq 0$) can only be monotonically decreasing. 
+This is appropriate here because such a distribution has the majority of its probability density concentrated towards lower values of $\pi_i$, reflecting the general ecological pattern that a species is rare at most sites within its geographic range [@brown_spatial_1995; @murray_species_1999].
+As with $p$, we estimate $\lambda$ from the data. 
+Figure \ref{fig:beta_dist} shows how different values of $\lambda$ affect the shape of the distribution.
+
+```{r, echo = FALSE, fig.cap = "Shape of the standard reflected beta distribution under different values of the parameter, $\\lambda$. \\label{fig:beta_dist}"}
+x <- seq(0, 1, length.out = 100)
+
+lambda <- seq(-10, 0, 1)
+
+plot(1, type = "n", xlim = range(x), ylim = c(0, 11), xlab = expression(italic(pi[i])), ylab = "Density")
+
+library(RColorBrewer)
+
+colors <- brewer.pal(length(lambda), "Spectral")
+
+for(i in seq_along(lambda)) lines(x, dbeta(x, 1, 1 - lambda[i]), col = colors[i])
+
+legend("topright", legend = lambda, title = expression(lambda), lty = rep(1, length(lambda)), col = colors, cex = 0.85)
+```
+
+Combining scenario (A), where *Paranthropus* is truly absent at the $i$th site and $Z_i = 0$, with scenario (B), where *Paranthropus* is present at the $i$th site and $Z_i = 1$: 
+
+\begin{subequations}
+  \begin{align} 
+      P(\pi_i | Z_i = 0) = \begin{cases} 
+        1 & \text{if } \pi_i = 0 \\
+        0 & \text{otherwise}
+     \end{cases}
+     \label{pi|Z=0}
+  \end{align}
+  
+  \begin{align} 
+      f(\pi_i | Z_i = 1) = (1 - \lambda) (1 - \pi_i) ^ {-\lambda},\quad \text{ if } \lambda \leq 0,\quad   0 \leq \pi_i \leq 1.
+      \label{pi|Z=1}
+  \end{align}
+\end{subequations}
+
+Equation \ref{pi|Z=0} can also be expressed more conveniently using an *indicator function*: $P(\pi_i | Z_i = 0)= I(\pi_i = 0)$, where $I(\pi_i = 0)$ equals $1$ if $\pi_i = 0$ and $0$ otherwise. 
+
+Finally, with $\pi_i$ defined for each site, we can now model the number of *Paranthropus* specimens recovered at site $i$, denoted $X_i$, as:
+
+\begin{align} 
+    X_i \sim Bin(n_i, \pi_i)
+    \label{binomial}
+\end{align}
+
+where $n_i$ is the total number of mammalian specimens recovered at site $i$ and is given by the observed data. 
+
+Since we have now specified the entire generative model, we can use this model to compute the probability of recovering, for any $i$, $X_i$ specimens of *Paranthropus* from the $i$th site. 
+First, focus on the case of $Z_i = 0$. 
+Recall that if $Z_i=0$, then $\pi_i = 0$, and our sampling probability becomes a point mass at $0$.
+Therefore, the number of sampled *Paranthropus* specimens must be zero (i.e., $X_i = 0$), so:
+
+\begin{align}
+    P(X_i = x | Z_i = 0) = I(X_i = 0).
+    \label{X|Z=0}
+\end{align}
+
+Alternatively, if $Z_i = 1$, we must account for both the randomness in selecting $\pi_i$ and the randomness in sampling $X_i$ given $\pi_i$, making the sampling probability hierarchical. 
+Recalling that $\pi_i$ is distributed according to $Beta(1, 1 - \lambda)$, we have:
+
+\begin{align}
+    P(X_i = x | Z_i = 1) \sim Bin(n_i, \pi_i), \text{ where } \pi_i \sim Beta(1, 1 - \lambda).
+    \label{X|Z=1}
+\end{align}
+
+In Bayesian statistics, this commonly used distribution is referred to as the beta-binomial distribution and has the following probability mass function:
+
+\begin{align}
+    P(X_i = x | Z_i = 1) = f_B(x_i;n_i,\lambda) = {n_i\choose x_i} \frac{B(x_i + 1, n_i - x_i + 1 - \lambda)}{B(1, 1 - \lambda)}
+    \label{beta-binom}
+\end{align}
+
+where $B$ denotes the beta function. 
+
+Combining Equations \ref{bernoulli}, \ref{X|Z=0}, and \ref{beta-binom} by adding over the two possible values of the latent variable $Z_i$, the law of total probability implies that:
+
+\begin{equation}
+\begin{aligned}
+    P(X_i = x) &= P(X_i = x | Z_i = 0) P(Z_i = 0) + P(X_i = x | Z_i = 1) P(Z_i = 1) \\
+               &= I(x = 0) (1 - p) + f_B(x;n_i,\lambda) p.
+\end{aligned}
+\label{P_X}
+\end{equation}
+
+Equation \ref{P_X} is the probability of recovering $x$ number of *Paranthropus* specimens for the $i$th site if the sample size is $n_i$.
+
+The general logic of the mixture model and how the parameters, variables, and data are related to each other are illustrated in Figure \ref{flow chart}.
+
+![Flow chart illustrating the general logic of the model and how the parameters, variables, and data are related to each other. Estimated parameters are in red, while observed data are in blue. \label{flow chart}](Model flow chart.pdf)
+
+## Complete and expected likelihood functions
+
+```{r, echo = FALSE}
+d <- read.csv("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Data/NISP data_5-28-20.csv", header = TRUE)
+```
+
+In the previous section, we discussed how the data are generated by our model, but ultimately, we are interested in going in the opposite direction: that is, given the data, $X_1, X_2,...X_{`r nrow(d)`}$ (where $X_1$ is the number of *Paranthropus* specimens in the first site, $X_2$ is the number of *Paranthropus* specimens in the second site, and we have a total of `r nrow(d)` sites), what are the parameters ($p$, $\lambda$)?
+Furthermore, we are interested in using these parameter estimates to infer the latent variables $Z_1, Z_2,...,Z_{`r nrow(d)`}$, using data from both within and outside the $i$th site. 
+In other words, we would like to assess the probability that a given site has *Paranthropus* present or not, conditional on observations from the site and parameter estimates in our model (which are informed by data from all sites).
+In order to estimate the parameters ($p$, $\lambda$), we use a method called maximum likelihood estimation.
+Intuitively, this method selects the parameter values that will make the data most probable, with larger probabilities indicating more likely parameter estimates [@wang_principles_2010]. 
+Using the estimated parameter values, we can estimate the probability that $Z_i = 1$ for the $i$th site, which is the probability that *Paranthropus* was present at the site (the complement of this probability is the probability that *Paranthropus* was absent from the $i$th site). 
+We note that the case that is most interesting is when no *Paranthropus* specimens have yet been observed at the given site.
+To do all this, we operate in the framework of likelihood and define a *likelihood function*.
+
+For now, assume that $Z_i$ is known.
+This allows us to compute the *complete likelihood function*, where the word "complete" indicates that our latent variables, $Z_i$, are explicitly accounted for.
+Assuming the site data are independent from each other and adopting the convention that $0 ^ 0 = 1$, the complete likelihood function can be written as:
+
+\begin{align}
+    L(p,\lambda) = P(X, Z|p, \lambda) = \prod_{i=1}^{N} [I(x_i = 0) (1 - p)] ^ {1 - Z_i} \times [f_B(x_i;n_i,\lambda) p] ^ {Z_i}.
+    \label{complete likelihood}
+\end{align}
+
+where $N$ is the total number of sites.
+It is worth spending some time dissecting Equation \ref{complete likelihood} and understanding how it works. 
+If $Z_i = 0$ (i.e., *Paranthropus* is truly absent from the $i$th site), the second element in the product in Equation \ref{complete likelihood} equals $1$ and is not considered in the likelihood function. Conversely, if $Z_i = 1$ (i.e., *Paranthropus* is present), the first element equals $1$ and is not considered. 
+Thus, different values of $Z_i$ will "turn on and off" different mixture components, so the proper one is considered.
+
+To make the likelihood function more mathematically tractable, we log-transform it to get the log-likelihood function:
+
+\begin{align}
+    \ell(p,\lambda) = log(P(X, Z|p, \lambda)) = \sum_{i=1}^{N} [(1 - Z_i) log(1 - p) + Z_i(log[f_B(x_i;n_i,\lambda)] + log[p])].
+    \label{log-likelihood}
+\end{align}
+
+
+We can only calculate the complete log-likelihood, however, if we know $Z_i$ in Equation \ref{log-likelihood}, and we do not. 
+To get around this obstacle, we compute the expected value of $\ell(p,\lambda)$, conditional on the data.
+While this may sound daunting, it amounts to computing the posterior distribution of $Z_i = 1$, given the data, which can be easily accomplished using Bayes' rule.
+More precisely, this posterior distribution is composed entirely of $P(Z_i = 1 | X_i)$, and one minus this probability gives $P(Z_i = 0 | X_i)$. 
+We then use $P(Z_i = 1 | X_i)$ as a stand-in for $Z_i$ in Equation \ref{log-likelihood} to calculate the expected log-likelihood. 
+Denoting the posterior probability as $\tau_i$, which is a function of parameters $p$ and $\lambda$,
+
+\begin{subequations}
+  \begin{align}
+    \tau_i(p, \lambda) = P(Z_i = 1 | X_i, p, \lambda) &= \frac{P(X_i | Z_i = 1) P(Z_i = 1)}{P(X_i)} 
+    \label{bayes}
+    \\
+                                                      &= \frac{f_B(x_i;n_i,\lambda) p}{I(X_i = 0) (1 - p) +   f_B(x_i;n_i,\lambda) p}
+    \label{tau1}
+  \end{align}
+  \label{tau}
+\end{subequations}
+
+where the first line (\ref{bayes}) follows from Bayes' rule, and the second line (\ref{tau1}) follows from Equations \ref{bernoulli} and \ref{beta-binom} (numerator) and \ref{P_X} (denominator). Note that this is the complement of the posterior probability of interest in the main text (i.e., the probability of true *Paranthropus* absence at site $i$, given the data and parameters, or $1 - \tau_i(p, \lambda)$). 
+
+Now we can calculate the expected log-likelihood by substituting $\tau_i$ (Equation \ref{tau}) in for $Z_i$ in Equation \ref{log-likelihood}. 
+Calling the expected log-likelihood $Q$,
+
+\begin{align}
+    Q(p, \lambda) = \mathbb{E}[\ell(p,\lambda)|X] = \sum_{i=1}^{N} [(1 - \tau_i(p, \lambda))log(1-p) + \tau_i(p, \lambda) (log[f_B(x_i;n_i,\lambda)] + log[p])].
+   \label{E_likelihood}
+\end{align}
+
+To estimate parameters $p$ and $\lambda$, we want to maximize $Q$ with respect to $p$ and $\lambda$.
+For $p$, this can be accomplished analytically by taking the derivative of $Q$ with respect to $p$ and setting it equal to zero as follows:
+
+\begin{align}
+  \frac{\partial Q}{\partial p} = \sum_{i=1}^{N} [(1 - \tau_i(p, \lambda)) \frac{1}{1 - p} + \tau_i(p, \lambda) \frac{1}{p}] = 0.
+  \label{dQ_dp}
+\end{align}
+
+Solving Equation \ref{dQ_dp} then gives the following expression for the maximizing value of $p$: 
+
+\begin{align}
+  p_{max} = \frac{1}{N} \sum_{i=1}^{N} \tau_i(p, \lambda)
+  \label{p_max}
+\end{align}
+
+which can be thought of as the average probability that $Z_i = 1$, given the data (cf. Equation \ref{tau}). 
+This should make sense, since this is how we defined $p$ originally, which can also be interpreted as the proportion of sites in which *Paranthropus* was present.
+
+Due to the complicated nature of $f_B$ (Equation \ref{beta-binom}), it is intractable to solve for $\lambda$ analytically.
+Instead, we will numerically solve for $\lambda_{max}$ in Equation \ref{E_likelihood} via the L-BFGS-B optimization algorithm [@byrd_limited_1995]. 
+
+## Expectation-maximization algorithm
+
+### Description
+
+We are now in a conundrum: if we knew the parameters $p$ and $\lambda$, we could compute the posterior probability $\tau_i$ (Equation \ref{tau}), which is what we are ultimately interested in. 
+If we knew $\tau_i$, we could compute the parameters $p$ (Equation \ref{p_max}) and $\lambda$ (numerical optimization of Equation \ref{E_likelihood}). 
+In fact, we can alternate performing each of these steps iteratively, which constitutes an algorithm known as expectation-maximization (EM). 
+The EM algorithm is a standard numerical method used to compute the maximum likelihood estimates of parameters for models with unobserved latent variables (e.g., $Z_i$) [@searle_variance_2006].
+In the EM algorithm, we:
+
+1) Take initial guesses of $p$ and $\lambda$ (call them $(p^{(0)}, \lambda^{(0)})$).
+
+2) [E-Step] Calculate all $\tau_i$'s (Equation \ref{tau}) using the most recent estimates of $p$ and $\lambda$. 
+We will call them $p^{(j)}$ and $\lambda^{(j)}$ to indicate that these are the $j$th values of $p$ and $\lambda$.
+
+3) Use the $\tau_i$'s to compute the expected log-likelihood, $Q(p^{(j)}, \lambda^{(j)})$ (Equation \ref{E_likelihood}). 
+Calculating $Q$ is not really necessary, but it can serve as an indicator of how goodness of fit changes as the model improves. 
+
+4) [M-Step] Using the new $\tau_i$'s, estimate a new $p^{(j + 1)}$ using Equation \ref{p_max} and a new $\lambda^{(j + 1)}$ by numerically optimizing Equation \ref{E_likelihood}. 
+
+5) [Stopping Criteria] Evaluate the new parameter estimates compared to the old ones. If they have changed by less than some small prespecified amount, stop. Otherwise, go back to step 2. 
+
+One more efficiently expresses these steps by simply writing:
+
+\begin{align}
+  (p^{(j+1)}, \lambda^{(j+1)}) = \underset{(p, \lambda)}{\operatorname{arg max}} Q(p, \lambda | p^{(j)}, \lambda^{(j)})
+  \label{EM}
+\end{align}
+
+Once we have estimated $p$ and $\lambda$ using the EM algorithm (Equation \ref{EM}), we can compute $\tau_i$ for each site using Equation \ref{tau}. This is the posterior probability that *Paranthropus* was present at site $i$, given the estimated parameters and data. We are mainly interested in the complement of this probability: 1 - $\tau_i$ (i.e., the posterior probability that *Paranthropus* was truly absent from site $i$, given the estimated parameters and data). 
+
+
+# Simulations to double-check the model {#sec:sim}
+
+For this section, we simulate *Paranthropus* abundances across sites, given a known $p$ and $\lambda$. 
+We then estimate $p$ and $\lambda$ with our model (Equation \ref{EM}) and compare the estimates to their predetermined values. 
+We use the observed number of sites and number of mammalian specimens across sites for the simulations, thereby only varying $p$ and $\lambda$.
+We conduct the simulations as follows:
+
+1) To determine at which sites *Paranthropus* was truly absent or present (i.e., $Z_i$), we take a random draw from a binomial distribution, where the number of trials is the number of sites, and the probability of success (i.e., *Paranthropus* is present) is the prespecified value of $p$. 
+The output is a vector of 0s and 1s, where the length of the vector is the total number of sites, 0 denotes true *Paranthropus* absence, 1 denotes true *Paranthropus* presence, and the proportion of 1s, on average, equals $p$. 
+
+2) For those sites that have *Paranthropus* (i.e., $Z_i = 1$), we simulate *Paranthropus* abundances (i.e., $X_i$) as a random draw from the beta-binomial distribution, given a prespecified $\lambda$ value (Equation \ref{beta-binom}) and the observed number of mammalian specimens at each site. 
+We do this using the `rbetabinom` function in the `rmutil` package [@R-rmutil]. 
+
+```{r, echo = FALSE}
+# source functions
+source("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Code/EM functions_4-13-20.R")
+
+# define objects
+X <- d$Paran.nisp
+n <- X + d$Non.paran.mamm.nisp
+
+# set simulated parameter values
+p.sim <- seq(0.1, 0.9, 0.2)
+lambda.sim <- c(-200, -100, -50, -25, -10, -5, -3, -1)
+
+# number of iterations for our simulations
+n.iter <- 1000 
+```
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE}
+# rerunning main EM analyses to get the estimated parameters
+EM.res <- EM(X, n, 0.5, -100)
+
+p_hat <- EM.res$p_hat
+lambda_hat <- EM.res$lambda_hat
+```
+
+3) Steps 1-2 are iterated `r n.iter` times.
+
+Chosen values for $p$ are (`r p.sim`), and those for $\lambda$ are (`r lambda.sim`).
+The $\lambda$ values cover a range of standard reflected beta distribution shapes for true *Paranthropus* relative abundance across sites (i.e., $\pi_i$) (Figure \ref{fig:sim_beta}), while encompassing the estimated value from our main analyses (i.e., `r round(lambda_hat)`). 
+We explore all pairwise combinations of $p$ and $\lambda$, and for each combination of values, we fit our model to the simulated data, iterated `r n.iter` times. 
+When estimating $\lambda$ by numerically optimizing Equation \ref{E_likelihood}, we cap the number of iterations in the optimization algorithm at 5000 due to the computationally intensive nature of these simulations (visual inspection of trace plots shows that the optimization algorithm typically converges on its parameter estimate well before 5000 iterations).
+We then calculate the mean and median estimated parameter values across all `r n.iter` iterations for each pairwise combination of $p$ and $\lambda$.
+We also calculated the median because our parameters are bounded ($p$ is bounded by 0 and 1, and $\lambda$ is bounded by $-\infty$ and 0), so their sampling distributions are likely to be skewed as the prespecified values approach these bounds.
+Calling the mean/median estimated parameter $\hat{\mu}$ and the true parameter $\mu$, we measure relative bias as $(\hat{\mu} - \mu) / \mid\mu \mid$.
+We use the absolute value of $\mu$ in the denominator to account for the fact that $\lambda$ is negative, so a negative relative bias translates to $\hat{\lambda}$ < $\lambda$ (e.g., -150 < -100). 
+
+```{r, echo = FALSE,  fig.cap = "Shape of the standard reflected beta distribution for different values of $\\lambda$ in our simulations. \\label{fig:sim_beta}"}
+x <- seq(0, 1, length.out = 1000)
+
+plot(1, type = "n", xlim = range(x), ylim = c(0, 11), xlab = expression(italic(pi[i])), ylab = "Density")
+
+library(RColorBrewer)
+
+colors <- brewer.pal(length(lambda.sim), "Spectral")
+
+for(i in seq_along(lambda.sim)) lines(x, dbeta(x, 1, 1 - lambda.sim[i]), col = colors[i])
+
+legend("topright", legend = lambda.sim, title = expression(lambda), lty = rep(1, length(lambda.sim)), col = colors, cex = 0.85)
+```
+
+All of this is operationalized with the `simulateData` function in our R script file. Note that we use R v.3.6.1 [@r_core_team_r_2019] for all our analyses.
+
+```{r, echo = FALSE, message = FALSE, cache = TRUE, eval = FALSE}
+# need to do parallel computing for the simulations
+
+# load packages
+library(doParallel)
+library(parallel)
+
+# get number of cores on computer
+numCores <- detectCores()
+
+# make the cluster using all cores
+cl <- makeCluster(numCores)
+
+# register the parallel backend
+registerDoParallel(cl)
+
+# set seed to make simulations replicable
+set.seed(100)
+
+sim.res <- foreach(p.iter = p.sim) %:% # iterate through p
+  
+  foreach(lambda.iter = lambda.sim) %:% # iterate through lambda
+  
+    foreach(i = seq_len(n.iter), .combine = "rbind") %dopar% { # run through each iteration
+      
+      X.sim <- simulateData(n_sites = nrow(d), n_mammSpec = n, p = p.iter, lambda = lambda.iter) # simulate Paranthropus abundance data for each of our 51 sites, using the observed number of mammalian specimens at each site (n_i) and the known values of p and lambda
+      
+      EM.iter <- EM(X.sim$n_ParanSpec, n, p.init = 0.5, lambda.init = -10, n.step.max = 5000) # use EM algorithm to estimate p and lambda, using a maximum of 5000 steps for the optimization algorithm
+      
+      return(c(EM.iter$p_hat, EM.iter$lambda_hat)) # return vector of estimated parameters
+    }
+
+# turn off cluster
+stopCluster(cl)
+
+# save the simulation results.
+save(sim.res, file = "C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Results/Model fits on simulations_8-3-20.RData")
+```
+
+```{r, echo = FALSE}
+load("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Results/Model fits on simulations_8-3-20.RData")
+
+p.bias.mean <- lambda.bias.mean <- p.bias.median <- lambda.bias.median <- array(data = NA, dim = c(length(p.sim), length(lambda.sim)), dimnames = list(p.sim, lambda.sim))
+
+for(p.index in seq_along(p.sim)){
+  
+  for(lambda.index in seq_along(lambda.sim)){
+    
+    sim.p <- sim.res[[p.index]][[lambda.index]][, 1]
+    
+    p.med <- median(sim.p)
+    p.mean <- mean(sim.p)
+    
+    sim.lambda <- sim.res[[p.index]][[lambda.index]][, 2]
+    
+    lambda.med <- median(sim.lambda)
+    lambda.mean <- mean(sim.lambda)
+    
+    p.bias.median[p.index, lambda.index] <- (p.med - p.sim[p.index]) / p.sim[p.index]
+    p.bias.mean[p.index, lambda.index] <- (p.mean - p.sim[p.index]) / p.sim[p.index]
+    
+    # the absolute value is needed because lambda is always negative
+    lambda.bias.median[p.index, lambda.index] <- (lambda.med - lambda.sim[lambda.index]) / abs(lambda.sim[lambda.index]) 
+    lambda.bias.mean[p.index, lambda.index] <- (lambda.mean - lambda.sim[lambda.index]) / abs(lambda.sim[lambda.index])
+  }
+}
+```
+
+When assessing relative bias using the mean parameter estimate over all `r n.iter` iterations for each pairwise combination of $p$ and $\lambda$, results show that $\hat{p}$ is fairly unbiased, though there is a slight positive bias when true $p$ is 0.1 and when true $\lambda$ becomes more negative (Figure \ref{fig:sim}).
+This is due to a large number of simulated zero *Paranthropus* abundances across sites when true $p$ is low (i.e., low proportion of sites with true *Paranthropus* presences) and true $\lambda$ is very negative (i.e., probability density of *Paranthropus* relative abundance across sites is concentrated more towards zero; Figure \ref{fig:sim_beta}). 
+As a result, the model is interpreting some of the observed zero abundances as unsampled presences, hence the larger $\hat{p}$'s.
+Indeed, larger $\hat{p}$'s are associated with more negative $\hat{\lambda}$'s (Figure \ref{fig:p_lambda}): $\lambda$'s are only estimated for those sites where *Paranthropus* is inferred to be present, and very negative $\hat{\lambda}$'s are associated with more unsampled presences.
+Overall, however, the relative bias for $\hat{p}$ is small (range: `r round(min(p.bias.mean), 2)` to `r round(max(p.bias.mean), 2)`).
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = paste0("Relative bias of $\\hat{p}$ (left) and $\\hat{\\lambda}$ (right) as inferred from simulations (", n.iter, " iterations for each pairwise combination of $p$ and $\\lambda$). Relative bias was calculated by substracting the true parameter value from either the mean (top) or the median (bottom) estimated value from each set of iterations and dividing the difference by the absolute value of the true parameter (see Section \\ref{sec:sim}). Red shading indicates that the mean/median estimated parameter is less than the true value (i.e., $\\hat{p}$ is too small, and the magnitude of $\\hat{\\lambda}$ is too large). Blue shading indicates the opposite. The gray column for $\\hat{\\lambda}$ when using the mean and when $p = 0.1$ indicates relative biases that are extremely negative due to estimating $\\lambda$ on those iterations where simulated *Paranthropus* abundances are zero across all sites (see Figure \\ref{fig:neg}). \\label{fig:sim}")}
+
+# load packages
+library(ggplot2)
+library(reshape2)
+
+# reshape data
+melt_p.bias.mean <- melt(p.bias.mean)
+melt_lambda.bias.mean <- melt(lambda.bias.mean)
+
+melt_p.bias.median <- melt(p.bias.median)
+melt_lambda.bias.median <- melt(lambda.bias.median)
+
+# combine into one dataframe with parameter name as a column for ggplot faceting
+melt_res <- data.frame(rbind(melt_p.bias.mean, 
+                             melt_lambda.bias.mean, 
+                             melt_p.bias.median, 
+                             melt_lambda.bias.median), 
+                       param = c(
+                         rep("p.mean", nrow(melt_p.bias.mean)), 
+                         rep("lambda.mean", nrow(melt_lambda.bias.mean)),
+                         rep("p.med", nrow(melt_p.bias.median)),
+                         rep("lambda.med", nrow(melt_lambda.bias.median))))
+
+# reorder factors so p is plotted on top of lambda
+melt_res$param <- ordered(melt_res$param, levels = c("p.mean", "lambda.mean", "p.med", "lambda.med"))
+
+# have to do this, so p is italicized in plot and hats are put on parameters
+levels(melt_res$param) <- c("p.mean" = expression(hat(italic(p)) ~ "(mean)"), 
+                            "lambda.mean" = expression(hat(lambda) ~ "(mean)"),
+                            "p.med" = expression(hat(italic(p)) ~ "(median)"),
+                            "lambda.med" = expression(hat(lambda) ~ "(median)"))
+
+# create plot
+ggplot(data = melt_res, aes(x = as.factor(Var1), y = as.factor(Var2), fill = value)) + 
+  facet_wrap(~param, nrow = 2, labeller = label_parsed) + 
+  geom_tile(color = "black") + 
+  scale_fill_gradient2(low = "red", high = "blue", mid = "white", 
+   midpoint = 0, limit = c(-0.2, 0.2), space = "Lab", 
+   name = "Relative bias") +
+  theme_minimal() + 
+  labs(x = expression("True" ~ italic(p)), y = expression("True" ~ lambda)) + 
+  theme(axis.title.x = element_text(size = 10), 
+        axis.title.y = element_text(size = 10),
+        axis.text = element_text(size = 8),
+        legend.text = element_text(size = 8),
+        legend.title = element_text(size = 10),
+        strip.text = element_text(size = 13),
+        legend.text.align = 1)
+```
+
+```{r, echo = FALSE, fig.cap = "Scatterplot showing the negative relationship between $\\hat{\\lambda}$ as a function of $\\hat{p}$ for simulations when true $p = 0.1$ and true $\\lambda = -200$. Those iterations where $\\hat{\\lambda}$ are unstable are excluded (see Section \\ref{sec:sim}) . \\label{fig:p_lambda}"}
+unstable.lambda <- sim.res[[1]][[1]][, 2] < -1e6
+
+par(mar = c(5, 4.5, 4, 2) + 0.1)
+
+plot(sim.res[[1]][[1]][!unstable.lambda, 1], sim.res[[1]][[1]][!unstable.lambda, 2], xlab = expression(hat(italic(p))), ylab = expression(hat(lambda)), main = expression("True" ~ italic(p) ~ "= 0.1; True" ~ lambda ~ "= -200"))
+```
+
+The relative bias of $\hat{\lambda}$, when calculated using the mean of all `r n.iter` iterations, becomes more negative as true $p$ decreases (Figure \ref{fig:sim}).
+This is again due to the increased number of simulated *Paranthropus* zero abundances across sites, which the model falsely interprets as unsampled presences (see previous paragraph).
+The gray column in Figure \ref{fig:sim} when true $p = 0.1$ denotes $\hat{\lambda}$'s that are extremely negative (i.e., `r sim.res[[1]][[1]][1, 2]`).
+This occurs when simulated *Paranthropus* abundances are zero across *all* sites, as might happen when true $p$ is small and true $\lambda$ is very negative.
+Zero abundances across sites means there is no information from which to distinguish true absences and presences, resulting in unstable, very negative $\hat{\lambda}$'s.
+Figure \ref{fig:neg} shows a negative linear relationship between true $\lambda$ and the number of unstable $\hat{\lambda}$'s (out of `r n.iter` iterations for each unique true $\lambda$), which is to be expected if more negative true $\lambda$'s lead to a higher probability of all sites having simulated *Paranthropus* abundances that are zero. 
+
+```{r, echo = FALSE, fig.cap = "Scatterplot showing the negative linear relationship between the number of unstable, extremely negative $\\hat{\\lambda}$'s as a function of how negative true $\\lambda$ is. Unstable $\\hat{\\lambda}$'s occur only when simulated *Paranthropus* abundances are zero across all sites (see Section \\ref{sec:sim}). \\label{fig:neg}"}
+neg.lamb <- sapply(sim.res[[1]], function(x) sum(x[, 2] < -1e6)) # count those iterations where estimated lambda is extremely negative
+
+par(mar = c(5, 4.5, 4, 2) + 0.1)
+
+plot(lambda.sim, neg.lamb, pch = 16, xlab = expression("True" ~ lambda), ylab = expression("Number of" ~ hat(lambda) ~ "that are extremely negative"))
+```
+
+When using the median parameter estimate, instead of the mean, across all `r n.iter` iterations for each pairwise combination of $p$ and $\lambda$, the relative bias in $\hat{p}$ is generally small across all parameter values (range: `r round(min(p.bias.median), 2)` to `r round(max(p.bias.median), 2)`) (Figure \ref{fig:sim}).
+The slight positive relative bias in $\hat{p}$ using the mean, and when true $p = 0.1$ and true $\lambda$ is very negative, disappears because the sampling distribution of $\hat{p}$ is right skewed when the true value is close to its lower bound (i.e, zero); such a skewed distribution "drags" the mean upwards, but the median is less affected.
+
+Relative bias of $\hat{\lambda}$ when using the median across all `r n.iter` iterations is only notable when true $p = 0.1$, and this bias is still small overall (largest relative bias is `r round(min(lambda.bias.median), 2)`) (Figure \ref{fig:sim}). 
+This pattern can again be attributed to the large number of simulated *Paranthropus* abundances that are zero across all sites, which the model is mistaking for unsampled presences.
+The unstable, extremely negative $\hat{\lambda}$'s disappear (gray column in Figure \ref{fig:sim}) because this happened rarely across all `r n.iter` iterations (Figure \ref{fig:neg}), such that $\hat{\lambda}$ is not affected by these few outliers when the median is used.
+
+In sum, the model produces relatively unbiased parameter estimates except when there are a lot of zero *Paranthropus* abundances in the data, as to be expected (i.e., it is difficult to produce robust parameter estimates when there are not a lot of *Paranthropus* abundances to work with). 
+The result is that the model is mistaking true absences as unsampled presences, causing $\hat{\lambda}$ to be too negative (Figure \ref{fig:sim}).
+However, this bias is still small in determining the overall shape of the beta distribution.
+For example, the largest relative bias when using the median (`r round(min(lambda.bias.median), 2)`) occurs when $p = 0.1$ and $\lambda = -1$. 
+This means median $\hat{\lambda}$ is too low by `r abs(round(min(lambda.bias.median) * -1, 2))` (i.e., median $\hat{\lambda}$ = `r -1 - abs(round(min(lambda.bias.median) * -1, 2))`).
+This does not change the estimated shape of the beta distribution in any meaningful way (cf. Figure \ref{fig:sim_beta}).
+Either way, our main analysis gives $\hat{p}$ = `r round(p_hat, 2)`, where $\hat{\lambda}$ is expected to have a negligible bias (Figure \ref{fig:sim}).
+
+
+# Assessing model assumptions
+
+Our model makes two assumptions regarding data independence:
+
+1) Site data are independent from each other.
+2) Within sites, specimen data are independent from each other.
+
+## Assumption #1: independence of site data
+
+### Regarding $p$
+
+Regarding assumption #1 in estimating $p$, this would be violated if true *Paranthropus* presence/absence is spatiotemporally autocorrelated across sites. 
+That is, sites that are closer together in space and/or time are more likely to exhibit the same state of *Paranthropus* presence/absence (e.g., closer sites all have *Paranthropus* present). 
+To assess this assumption, we first take observed *Paranthropus* presence/absence data across sites and assume that they reflect true presence/absence. 
+We know that this is strictly not true as an observed absence can reflect an unsampled presence (after all, this is the general problem we are trying to address), but it can also be reasonably assumed that observed presence/absence is more reflective of true presence/absence, rather than complete noise. 
+We then consider all pairwise comparisons of sites in terms of (1) whether their observed *Paranthropus* presence/absence states match (1 = match, 0 = otherwise) and (2) their temporal and spatial distances from each other. 
+We finally use multiple logistic regression to model (1) as a function of (2) with an interaction term between temporal and spatial distance (after centering and scaling the independent variables) to see if sites that are closer together in time and/or space are more likely to exhibit the same observed *Paranthropus* presence/absence state.
+
+```{r, echo = FALSE}
+# define objects
+rel.abund <- X / n
+
+# calculate distances between sites
+RA.dist <- dist(rel.abund) # relative abundance
+
+PA <- as.numeric(X != 0) # presence = 1, absence = 0
+PA.dist <- dist(PA) # presence absence
+# invert zeros and ones so 1 indicates a match, 0 otherwise
+PA.dist1 <- PA.dist 
+PA.dist1[PA.dist == 0] <- 1
+PA.dist1[PA.dist == 1] <- 0
+
+time.dist <- dist(d$Mean.Age_Ma) # time
+
+spatial.dist <- dist(d[, c("Latitude", "Longitude")]) # space
+```
+
+```{r, echo = FALSE}
+glm.PA <- glm(PA.dist1 ~ scale(c(time.dist)) * scale(c(spatial.dist)), family = "binomial")
+
+lm.rel.abund <- lm(RA.dist ~ scale(c(time.dist)) * scale(c(spatial.dist)))
+
+lm.df <- data.frame(glm.PA$coefficients, lm.rel.abund$coefficients)
+
+rownames(lm.df) <- c("Intercept", "scale(temporal distance)", "scale(spatial distance)", "Interaction term")
+colnames(lm.df) <- c("Presence-absence logistic regression", "Relative abundance OLS")
+```
+
+Table \ref{tab:lm_tab} shows that the logistic regression coefficient estimates for temporal distance and the interaction term are small, while it is larger for spatial distance. 
+We will not discuss the interaction term given its negligible magnitude (indeed, coefficient estimates are virtually identical when no interaction term is included). 
+Firstly, the coefficient estimates are expected to be negative: an increase in spatial and/or temporal distance between sites should lead to differences in *Paranthropus* presence/absence states (i.e., *Paranthropus* is present at one site but absent at the other); recall that we coded different states as 0s, while matches are 1s.
+We can exponentiate the logistic regression coefficients to make them more interpretable using the language of odds.
+Odds are defined, in our case, as the probability of *Paranthropus* presence/absence states matching divided by the probability that they do not match.
+Therefore, an odds of 2 means it is twice as likely that *Paranthropus* presence/absence states will match rather than not.
+When exponentiated, the intercept is `r round(exp(glm.PA$coefficients[1]), 2)`, meaning that the probability of *Paranthropus* states matching is only `r (round(exp(glm.PA$coefficients[1]), 2) - 1) * 100`% more likely than them not matching when the independent variables are set to zero (zero values in our case indicate the average pairwise temporal and spatial distance in our dataset because we centered the variables prior to analysis). 
+The exponentiated coefficients for "scale(temporal distance)" and "scale(spatial distance)" are `r round(exp(glm.PA$coefficients[2]), 2)` and `r round(exp(glm.PA$coefficients[3]), 2)`, respectively. 
+Thus, when holding spatial distance constant, a one standard deviation increase in temporal distance results in a `r abs(1 - round(exp(glm.PA$coefficients[2]), 2)) * 100`% *increase* in the odds of *Paranthropus* presence/absence states matching, opposite the direction we would expect. 
+Holding temporal distance constant, a one standard deviation increase in spatial distance leads to a `r abs(1 - round(exp(glm.PA$coefficients[3]), 2)) * 100`% decrease in the odds of *Paranthropus* presence/absence states matching. 
+This translates to a decrease in odds from `r round(exp(glm.PA$coefficients[1]), 2)` to `r round(exp(glm.PA$coefficients[1]) * exp(glm.PA$coefficients[3]), 2)` when the variable "scale(spatial distance)" increases from 0 to 1 (while setting the other variables to zero).
+However, because we centered and scaled the data prior to analysis, this increase is quite substantial (Figure \ref{fig:spat_dist}).
+In sum, there appears to be no temporal autocorrelation in *Paranthropus* presence/absence states, but there might be some slight spatial autocorrelation.
+
+Even if the assumption of non-independence is violated and there is some spatial autocorrelation, our likelihood function is what is called a composite-likelihood, and the parameter estimates are consistent (i.e. they will converge to the true values as the sample size approaches infinity) [@lindsay_composite_1988]. The impact of such autocorrelation would be to increase the variance of the parameter estimates and decrease their efficiency (i.e., the speed at which the estimates converge to their true values). However, based on the analysis above, it seems that the spatial autocorrelation is small and this effect will be minimal.
+
+```{r, echo = FALSE, fig.cap = "Histogram of the centered and scaled spatial distances between every pairwise combination of sites. Centering the data results in a mean of zero, while scaling transforms the data into standard deviation units. \\label{fig:spat_dist}"}
+hist(scale(spatial.dist), xlab = "scale(spatial distance)", ylab = "Numbers of pairs of sites", col = "gray", main = "")
+```
+
+
+### Regarding $\lambda$
+
+Regarding assumption #1 in estimating $\lambda$, this would be violated if true *Paranthropus* relative abundance is spatiotemporally autocorrelated across sites. 
+That is, sites that are closer together in space and/or time are more likely to have similar *Paranthropus* relative abundance values. 
+As with *Paranthropus* presence/absence before, we take observed *Paranthropus* relative abundances across sites and assume that they reflect true relative abundances.
+This assumption is safer than the previous one concerning presence/absence data, given that observed relative abundances track their true counterparts but with a positive bias that increases as a function of taxon rarity and sampling incompleteness [@chao_unveiling_2015].
+We then consider all pairwise comparisons of sites in terms of their (1) differences in observed *Paranthropus* relative abundance and (2) temporal and spatial distances from each other. 
+As with the the presence/absence logistic regression, we model (1) as a function of (2) with an interaction between the centered and scaled independent variables, but this time using multiple ordinary least square regression.
+Again, the goal is to assess whether sites that are closer together in time and/or space are more similar in their observed *Paranthropus* relative abundances.
+
+Table \ref{tab:lm_tab} shows that all regression coefficients are small, and the multiple $R^2$ of the entire model is only `r round(summary(lm.rel.abund)$r.squared, 2)`. 
+Considering all pairwise comparisons between sites, Figure \ref{fig:autocorr} plots observed *Paranthropus* relative abundance difference as a function of temporal (Figure \ref{fig:autocorr}A) or spatial (Figure \ref{fig:autocorr}B) distance. 
+We expect the relationships to be positive, where sites that are further away temporally or spatially are expected to have more dissimilar relative abundance values. 
+The observed relationships are in fact *negative* (Figure \ref{fig:autocorr}), opposite the expected direction.
+Therefore, it appears that observed *Paranthropus* relative abundances across sites are not spatiotemporally autocorrelated. 
+
+\newpage
+
+```{r, echo = FALSE}
+knitr::kable(round(lm.df, 3), caption = "Coefficient estimates for the multiple logistic (presence-absence) and multiple ordinary least squares (relative abundance) regression models. \"scale\" indicates that these independent variables were centered and scaled prior to fitting the models. \\label{tab:lm_tab}")
+```
+
+```{r, echo = FALSE, fig.cap = "Scatter plots of observed *Paranthropus* relative abundance difference as a function of (A) temporal distance and (B) spatial distance for all pairwise comparisons of sites. $\\rho$ is the Spearman's rank correlation coefficient. \\label{fig:autocorr}"}
+par(mfrow = c(1, 2), mar = c(5, 4, 4, 0) + 0.1)
+
+plot(time.dist, RA.dist, main = "", xlab = "Temporal distance (millions of years)", ylab = expression(italic(Paranthropus) ~ "relative abundance difference"), cex.axis = 0.8, cex.lab = 0.8)
+
+mtext("A", at = 0, cex = 1.5)
+
+cor.time <- round(cor(time.dist, RA.dist, method = "spearman"), 2)
+
+text(1.25, 0.05, bquote(rho == .(cor.time)), pos = 4, cex = 0.8)
+
+
+plot(spatial.dist, RA.dist, main = "", xlab = "Spatial distance\n(Euclidean distance using lat/long)", ylab = "", cex.axis = 0.8, cex.lab = 0.8)
+
+mtext("B", at = 0, cex = 1.5)
+
+cor.space <- round(cor(spatial.dist, RA.dist, method = "spearman"), 2)
+
+text(15, 0.05, bquote(rho == .(cor.space)), pos = 4, cex = 0.8)
+```
+
+It should be noted that our models exhibit negligible multicollinearity: the Spearman's rank correlation between temporal and spatial distance between pairs of sites is only $\rho = `r round(cor(spatial.dist, time.dist, method = "spearman"), 2)`$.
+
+
+## Assumption #2: independence of specimen data
+
+```{r, echo = FALSE}
+### get frequency distribution of NISP within individuals for databases
+
+## Laetoli
+laetoli <- read.csv("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Databases/eppe_1998-2005_200329_.csv", header = TRUE)
+
+# subset out certain taxa
+laetoli <- laetoli[laetoli$class == "Mammalia" &
+                     laetoli$order != "" &
+                     laetoli$order != "Lagomorpha" & 
+                     laetoli$order != "Rodentia" &
+                     laetoli$order != "Insectivora" &
+                     laetoli$order != "Stylommatophora", ] # get out large mammals ID'ed to order
+
+laetoli <- laetoli[!(laetoli$order == "Primates" &
+                       laetoli$family == ""), ] # remove primate indet.
+
+# subset out beds
+laetoli.beds <- c("Ndolanya Beds, Upper Unit", 
+                  "Naibadad Beds", 
+                  "Ngaloba Beds, Lower Unit")
+
+# get number of individuals per NISP
+laetoli.counts <- lapply(laetoli.beds, function(bed) laetoli$organism_quantity[laetoli$bed == bed])
+
+names(laetoli.counts) <- laetoli.beds
+
+## Turkana
+turkana <- read.csv("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Databases/Turkana v47 pruned for Andrew Du.csv", header = TRUE)
+
+turkana$Member[grep("Lomekwi", turkana$Member)] <- "Lomekwi"
+
+# get out members of interest
+turk.mbr <- c("Upper Burgi", 
+              "KBS", 
+              "Okote", 
+              "Chari", 
+              "Lomekwi", 
+              "Lokalalei", 
+              "Kalochoro", 
+              "Kaitio", 
+              "Natoo", 
+              "Nariokotome")
+
+turkana <- turkana[turkana$Member %in% turk.mbr, ]
+
+# remove micromammals
+turk.remove.orders <- c("Lagomorpha", 
+                        "Rodentia")
+turkana <- turkana[!(turkana$Order %in% turk.remove.orders), ]
+
+# remove primate indet.
+turkana <- turkana[!(turkana$Order == "Primates" & turkana$Family == ""),]
+
+# remove hominin indet.
+turkana <- turkana[!(turkana$Tribe == "Hominini" & turkana$Genus == ""),]
+
+# get number of individuals per NISP
+turk.counts <- sapply(turk.mbr, function(member){
+  
+  turkana1 <- turkana[turkana$Member == member, ]
+  turk.cts <- table(turkana1$SpecimenNumber)
+  turk.cts <- turk.cts[turk.cts > 0]
+  
+  return(table(turk.cts))
+})
+
+## Shungura (American & French)
+amer <- read.csv("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Databases/Omo American_corrected using Wood & Leakey 2011.csv", header = TRUE)
+
+french <- read.csv("C:/Users/adu/OneDrive - Colostate/Desktop/Manuscripts/Du & Alemseged 2019_Paranthropus afar/Databases/Omo french_corrected using Wood & Leakey 2011.csv", header = TRUE)
+
+# fix French members
+for(i in c(3:8, 10:12)) french$member[french$member == letters[i]] <- LETTERS[i]
+
+# remove certain taxa
+remove.gen.french <- c(
+  "Aethomys",
+  "algae",
+  "Australopithecus",
+  "aves",
+  "aves ?",
+  "aves",
+  "chelonia",
+  "chelonia ?",
+  "coprolith",
+  "coprolithe",
+  "crocodilia",
+  "crocodilia ?",
+  "crocodilidae",
+  "Crocodylus",
+  "Cycloderma",
+  "cyprinidae",
+  "cyprinidae ?",
+  "dipodidae",
+  "egg",
+  "etheria",
+  "Euthecodon",
+  "fruit",
+  "gasteropod",
+  "gasteropods",
+  "Gen Nov",
+  "Geochelone",
+  "Grammomys",
+  "Heterocephalus",
+  "hominidae",
+  "indet",
+  "INDET",
+  "indet (suidae ?)",
+  "Jaculus",
+  "leporidae",
+  "Mastomys",
+  "Oenomys",
+  "ostrea",
+  "Paraxerus",
+  "Pelusios",
+  "pisces",
+  "pisces ",
+  "plantae",
+  "pottery  frag",
+  "pottery frag",
+  "python ",
+  "reptilia",
+  "reptilia ",
+  "reptilia ?",
+  "rodentia",
+  "shell",
+  "shells agglomerat",
+  "siluriformes",
+  "soil sample",
+  "stone",
+  "STONE",
+  "stones",
+  "Tatera",
+  "Thallomys",
+  "Thryonomys",
+  "tomistomidae",
+  "wood",
+  "wood ?",
+  "Xerus"
+  )
+
+remove.gen.amer <- c(
+  "",
+  "16 - 18",
+  "18 - 44",
+  "2 - 39",
+  "24 - 33",
+  "48g - 48n",
+  "65 - 99",
+  "Aethomys",
+  "Albizia",
+  "Amphibia",
+  "Anatidae",
+  "Anhinga",
+  "Anura",
+  "Ardea",
+  "Arvicanthis",
+  "Australopithecus",
+  "Aves",
+  "Bagridae",
+  "Barbus",
+  "Bufonidae",
+  "Chelonia",
+  "Chiroptera",
+  "Ciconiidae",
+  "Clarias",
+  "Clariidae",
+  "Clarius",
+  "Clarotes",
+  "Coleura",
+  "Coprolite",
+  "Cricetidae",
+  "Crocidura",
+  "Crocodilidae",
+  "Crocodilus",
+  "Cut Bone",
+  "Cycloderma",
+  "Cyprinidae",
+  "DELETED",
+  "DISCARDED",
+  "Eidolon",
+  "EMPTY",
+  "Euthecodon",
+  "Fossil Fruit",
+  "Fossil Wood",
+  "Garsinia",
+  "Geochelone",
+  "Gerbillus",
+  "Golunda",
+  "Gymnarchus",
+  "Heterocephalus",
+  "Hipposideros",
+  "Hominidae",
+  "Hydrocynus",
+  "Hydrocyon",
+  "Hydrocyonus",
+  "Hyperopsius",
+  "Indeterminate",
+  "Jaculus",
+  "Labeo",
+  "Lates",
+  "Lemniscomys",
+  "Lepus",
+  "Lost",
+  "LOST",
+  "Mammalia",
+  "Mastomys",
+  "Muridae",
+  "Murinae",
+  "Muroidea",
+  "Mus ",
+  "Myosorex",
+  "No det.",
+  "Not assigned",
+  "Not Assigned",
+  "NOT COLLECTED",
+  "Paraxerus",
+  "Part of L232-189",
+  "PART OF L398-17",
+  "PART OF L628-97D",
+  "Pebble",
+  "Pelomys",
+  "Pelusios",
+  "Percoidei",
+  "Phasianidae",
+  "Pisces",
+  "Polypterus",
+  "Protopterus",
+  "Pumice",
+  "Quartz Flakes",
+  "Quartz Pebble",
+  "Ranidae",
+  "Reptilia",
+  "Rodentia",
+  "Saidomys",
+  "Serpentes",
+  "Shells",
+  "Siluriformes",
+  "Sindacharax",
+  "Sindarcharax",
+  "Stone artifact",
+  "Stone Artifact",
+  "Suncus",
+  "Synodontis",
+  "Taphozous",
+  "Tatera",
+  "Thallomys",
+  "Thryonomys",
+  "Trionichidae",
+  "Trionychidae",
+  "Trionyx",
+  "UNASSIGNED",
+  "Xerus"
+)
+
+amer <- amer[!(amer$Genus %in% remove.gen.amer), ]
+
+french <- french[!(french$genus %in% remove.gen.french), ]
+
+# subset out members
+omo.mbr <- c("C", "D", "E", "F", "G", "H", "J", "K", "L")
+
+amer <- amer[amer$Member %in% omo.mbr, ]
+
+french <- french[french$member %in% omo.mbr, ]
+
+# get counts
+amer$Individual.Number <- amer$Individual.Number + 1
+amer$Individual.Number[is.na(amer$Individual.Number)] <- 1
+
+amer.counts <- sapply(omo.mbr, function(member){
+  
+  amer1 <- amer[amer$Member == member, ]
+  
+  amer.cts <- table(amer1$Individual.Number)
+  
+  amer.cts <- amer.cts[names(amer.cts) != 2]
+  
+  amer.cts.rev <- rev(amer.cts)
+  
+  for(i in seq_along(amer.cts.rev)[-c(length(amer.cts.rev) - 1, length(amer.cts.rev))]){
+    
+    if(amer.cts.rev[i] > 0) amer.cts.rev[seq(i + 1, length(amer.cts.rev) - 1)] <- amer.cts.rev[seq(i + 1, length(amer.cts.rev) - 1)] - 1
+  }
+  
+  amer.cts.rev[amer.cts.rev < 0] <- 0
+  
+  amer.cts.rev <- amer.cts.rev[amer.cts.rev > 0]
+  
+  return(rev(amer.cts.rev))
+})
+
+french.counts <- sapply(omo.mbr, function(member){
+  
+  french.cts <- table(french$specimen.number[french$member == member])
+  french.cts <- french.cts[french.cts > 0]
+  return(table(french.cts))
+})
+
+omo.counts <- vector(mode = "list", length = length(amer.counts))
+names(omo.counts) <- names(amer.counts)
+
+for(i in seq_along(omo.counts)){
+  
+  comb.counts <- c(amer.counts[[i]], french.counts[[i]])
+  
+  comb.counts1 <- tapply(comb.counts, names(comb.counts), sum)
+  
+  comb.counts2 <- comb.counts1[order(as.numeric(names(comb.counts1)))]
+  
+  omo.counts[[i]] <- as.table(comb.counts2)
+}
+```
+
+Assumption #2 would be violated if multiple specimens belonged to the same individual (e.g., a partial skeleton), and this was the case for a large portion of specimens at each site. 
+Non-independence would artificially inflate the number of independent data points for each site, which would bias posterior probabilities of absence upwards.
+We assessed independence of specimen data for those sites where data on the number of specimens per individual are available (i.e., databases). 
+Results show that the majority of individuals at each site are comprised of one specimen (Figure \ref{fig:freq_dist}).
+In fact, for each site, the proportion of individuals made up of one specimen exceeds 0.8, except for Member G of the Shungura Formation (`r round(omo.counts$G[1] / sum(omo.counts$G), 2)`) (Figure \ref{fig:prop_one}).
+Because all sites in our dataset are taphonomically similar in a general sense (e.g., eastern African large mammalian fossil assemblages that were preserved in fluvio-lacustrine settings and predominantly surface collected), we assume that the dominance of single-specimen individuals is a general pattern that can be extrapolated to those sites not represented in Figures \ref{fig:freq_dist} and \ref{fig:prop_one}.
+Thus, given the low proportion of individuals with non-independent specimen data at each site, we view Assumption #2 as not grossly violated, and the estimated posterior probabilities of absence are robust.  
+
+```{r, echo = FALSE, fig.height = 8.5, fig.cap = "Frequency distributions depicting the number of individuals with a given number of specimens for each site, where those data are available (i.e., databases). \\label{fig:freq_dist}"}
+
+xlimit <- c(1, 80)
+
+par(mfrow = c(8, 3), mar = c(2, 2, 2, 0) + 0.1, oma = c(2, 2, 0, 0))
+
+plot(omo.counts$C, type = "h", main = "Member C (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$D, type = "h", main = "Member D (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$E, type = "h", main = "Member E (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$F, type = "h", main = "Member F (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$G, type = "h", main = "Member G (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$H, type = "h", main = "Member H (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$J, type = "h", main = "Member J (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$K, type = "h", main = "Member K (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(omo.counts$L, type = "h", main = "Member L (Shungura)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Upper Burgi`, type = "h", main = "upper Burgi (Koobi Fora)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`KBS`, type = "h", main = "KBS (Koobi Fora)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Okote`, type = "h", main = "Okote (Koobi Fora)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Chari`, type = "h", main = "Chari (Koobi Fora)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Lomekwi`, type = "h", main = "Lomekwi (Nachukui)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Lokalalei`, type = "h", main = "Lokalalei (Nachukui)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Kalochoro`, type = "h", main = "Kalochoro (Nachukui)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Kaitio`, type = "h", main = "Kaitio (Nachukui)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Natoo`, type = "h", main = "Natoo (Nachukui)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(turk.counts$`Nariokotome`, type = "h", main = "Nariokotome (Nachukui)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(table(laetoli.counts$`Ndolanya Beds, Upper Unit`), type = "h", main = "Upper Ndolanya (Laetoli)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(table(laetoli.counts$`Naibadad Beds`), type = "h", main = "Naibadad (Laetoli)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+plot(table(laetoli.counts$`Ngaloba Beds, Lower Unit`), type = "h", main = "Lower Ngaloba (Laetoli)", xlim = xlimit, xaxt = "n", col = "blue")
+
+axis(1, at = seq(1, 80, 3))
+
+par(mfrow = c(1, 1))
+
+mtext("Number of identified specimens", 1, at = 35, line = 3, cex = 1.25)
+
+mtext("Number of individuals", 2, at = 16, line = 3, cex = 1.25)
+```
+
+```{r, echo = FALSE}
+sing.prop <- c(
+  sapply(laetoli.counts, function(x){
+     lae.tab <- table(x)
+     return(lae.tab[1] / sum(x))
+ }),
+ 
+ sapply(turk.counts, function(x) x[1] / sum(x)),
+ 
+ sapply(omo.counts, function(x) x[1] / sum(x))
+)
+```
+
+```{r, echo = FALSE, fig.cap = "Histogram of the number of sites with a given proportion of individuals with one specimen. The proportion was calculated for each site as the number of individuals represented by one specimen divided by the total number of individuals. \\label{fig:prop_one}"}
+
+hist(sing.prop, ylab = "Number of sites", xlab = "Proportion of individuals with one specimen", main = "", col = "gray")
+```
+
+\newpage
+
+# References
