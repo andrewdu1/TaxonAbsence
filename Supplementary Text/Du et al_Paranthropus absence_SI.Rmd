@@ -6,7 +6,7 @@ output:
       number_sections: true
       toc : true
 bibliography: My Library.bib
-csl: journal-of-human-evolution.csl
+csl: methods-in-ecology-and-evolution.csl
 ---
 
 # Detailed overview of the mixture model
