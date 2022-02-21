@@ -17,9 +17,9 @@ knitr::opts_knit$set(root.dir = "C:/Users/adu/OneDrive - Colostate/Desktop/Manus
 
 ## Motivation
 
-While the methodology presented in this work is broadly applicable to any taxon, regarding the problem of inferring its true absence at each of a collection of sites, we present the model using the example of the hominin genus *Paranthropus* from eastern Africa, as was done in the main text.
+While the methodology presented in this work is broadly applicable to any taxon, regarding the problem of inferring its true absence across a collection of sites, we present the model using the example of the hominin genus *Paranthropus* from eastern Africa, as was done in the main text.
 Inferring whether *Paranthropus* was truly absent at a site is difficult because observed absence is consistent with two mutually exclusive outcomes: (A) *Paranthropus* never occupied the site (i.e., "true absence"), or (B) it did occupy the site but has not been sampled yet. 
-We are ultimately interested in estimating the probability of each of these two possibilities, conditional on not finding a *Paranthropus* specimen after sampling $n$ specimens at a given site. 
+We are ultimately interested in estimating the probability of each of these two possibilities, conditional on not finding a *Paranthropus* specimen after sampling $n$ mammalian specimens at a given site. 
 To accomplish this, we propose a mixture model wherein each of the two outcomes is modeled with a different probability distribution called a *mixture component*. 
 As we will see, this model, along with Bayes' rule, will allow us to compute the probability that a given site was generated from possibility (A) or (B), conditional on sampling $n$ mammalian specimens without finding *Paranthropus*, and thus estimate the likelihood that *Paranthropus* was truly absent from a given site or has not been sampled yet. 
 
@@ -228,10 +228,10 @@ Solving Equation \ref{dQ_dpsi} then gives the following expression for the maxim
 \end{align}
 
 which can be thought of as the average probability that $Z_i = 1$, given the data (cf. Equation \ref{tau}). 
-This should make sense, since this is how we defined $\psi$ originally, which can also be interpreted as the proportion of sites in which *Paranthropus* was present.
+This should make sense, since this is the alternative interpretation we originally provided for $\psi$: the proportion of sites in which *Paranthropus* was present.
 
 Due to the complicated nature of $f_B$ (Equation \ref{beta-binom}), it is intractable to solve for $\lambda$ analytically.
-Instead, we will numerically solve for $\lambda_{max}$ in Equation \ref{E_likelihood} via the L-BFGS-B optimization algorithm [@byrdLimitedMemoryAlgorithm1995]. 
+Instead, we will numerically solve for $\lambda_{max}$ in Equation \ref{E_likelihood} using the L-BFGS-B optimization algorithm [@byrdLimitedMemoryAlgorithm1995]. 
 
 ## Expectation-maximization algorithm
 
@@ -239,7 +239,7 @@ Instead, we will numerically solve for $\lambda_{max}$ in Equation \ref{E_likeli
 
 We are now in a conundrum: if we knew the parameters $\psi$ and $\lambda$, we could compute the posterior probability $\tau_i$ (Equation \ref{tau}), which is what we are ultimately interested in. 
 If we knew $\tau_i$, we could compute the parameters $\psi$ (Equation \ref{psi_max}) and $\lambda$ (numerical optimization of Equation \ref{E_likelihood}). 
-In fact, we can alternate performing each of these steps iteratively, which constitutes an algorithm known as expectation-maximization (EM). 
+In fact, we can alternate performing each of these steps iteratively, which constitutes an algorithm known as *expectation-maximization* (EM). 
 The EM algorithm is a standard numerical method used to compute the maximum likelihood estimates of parameters for models with unobserved latent variables (e.g., $Z_i$) [@searleVarianceComponents2006].
 In the EM algorithm, we:
 
@@ -267,13 +267,13 @@ Once we have estimated $\psi$ and $\lambda$ using the EM algorithm (Equation \re
 
 # Simulations to double-check the model {#sec:sim}
 
-For this section, we simulate *Paranthropus* abundances across sites, given a known $\psi$ and $\lambda$. 
+For this section, we simulate *Paranthropus* abundances across sites, given known $\psi$ and $\lambda$. 
 We then estimate $\psi$ and $\lambda$ with our model (Equation \ref{EM}) and compare the estimates to their predetermined values. 
-We use the observed number of sites and number of mammalian specimens across sites for the simulations, thereby only varying $\psi$ and $\lambda$.
+We use the observed number of sites and number of mammalian specimens across sites for the simulations, thereby varying $\psi$ and $\lambda$ only.
 We conduct the simulations as follows:
 
-1) To determine at which sites *Paranthropus* was truly absent or present (i.e., $Z_i$), we take a random draw from a binomial distribution, where the number of trials is the number of sites, and the probability of success (i.e., *Paranthropus* is present) is the prespecified value of $\psi$. 
-The output is a vector of 0s and 1s, where the length of the vector is the total number of sites, 0 denotes true *Paranthropus* absence, 1 denotes true *Paranthropus* presence, and the proportion of 1s, on average, equals $\psi$. 
+1) To determine at which sites *Paranthropus* was truly absent or present (i.e., $Z_i$), we take random draws from a Bernoulli distribution, where the number of trials is the number of sites, and the probability of success (i.e., *Paranthropus* is present) is the prespecified value of $\psi$. 
+The output is a vector of 0s and 1s, where the length of the vector is the total number of sites, 0 denotes true *Paranthropus* absence, 1 denotes true *Paranthropus* presence, and the proportion of 1s equals $\psi$ on average. 
 
 2) For those sites that have *Paranthropus* (i.e., $Z_i = 1$), we simulate *Paranthropus* abundances (i.e., $X_i$) as a random draw from the beta-binomial distribution, given a prespecified $\lambda$ value (Equation \ref{beta-binom}) and the observed number of mammalian specimens at each site. 
 We do this using the `rbetabinom` function in the `rmutil` package [@R-rmutil]. 
@@ -304,12 +304,12 @@ lambda_hat <- EM.res$lambda_hat
 
 3) Steps 1-2 are iterated `r n.iter` times.
 
-Chosen values for $\psi$ are (`r psi.sim`), and those for $\lambda$ are (`r lambda.sim`).
-The $\lambda$ values cover a range of standard reflected beta distribution shapes for true *Paranthropus* relative abundance across sites (i.e., $p_i$) (Figure \ref{fig:sim_beta}), while encompassing the estimated value from our main analyses (i.e., `r round(lambda_hat)`). 
+Chosen values for $\psi$ are (`r psi.sim`) and those for $\lambda$ are (`r lambda.sim`).
+The $\lambda$ values cover a range of standard reflected beta distribution shapes for the sampling probability of *Paranthropus* across sites (i.e., $p_i$) (Figure \ref{fig:sim_beta}), while encompassing the estimated value from our main analyses (i.e., `r round(lambda_hat)`). 
 We explore all pairwise combinations of $\psi$ and $\lambda$, and for each combination of values, we fit our model to the simulated data, iterated `r n.iter` times. 
 When estimating $\lambda$ by numerically optimizing Equation \ref{E_likelihood}, we cap the number of iterations in the optimization algorithm at 5000 due to the computationally intensive nature of these simulations (visual inspection of trace plots shows that the optimization algorithm typically converges on its parameter estimate well before 5000 iterations).
 We then calculate the mean and median estimated parameter values across all `r n.iter` iterations for each pairwise combination of $\psi$ and $\lambda$.
-We also calculated the median because our parameters are bounded ($\psi$ is bounded by 0 and 1, and $\lambda$ is bounded by $-\infty$ and 0), so their sampling distributions are likely to be skewed as the prespecified values approach these bounds.
+We included the median because our parameters are bounded ($\psi$ is bounded by 0 and 1, and $\lambda$ is bounded by $-\infty$ and 0), so their sampling distributions are likely to be skewed as the prespecified values approach these bounds.
 Calling the mean/median estimated parameter $\hat{\mu}$ and the true parameter $\mu$, we measure relative bias as $(\hat{\mu} - \mu) / \mid\mu \mid$.
 We use the absolute value of $\mu$ in the denominator to account for the fact that $\lambda$ is negative, so a negative relative bias translates to $\hat{\lambda}$ < $\lambda$ (e.g., -150 < -100). 
 
@@ -327,7 +327,8 @@ for(i in seq_along(lambda.sim)) lines(x, dbeta(x, 1, 1 - lambda.sim[i]), col = c
 legend("topright", legend = lambda.sim, title = expression(lambda), lty = rep(1, length(lambda.sim)), col = colors, cex = 0.85)
 ```
 
-All of this is operationalized with the `simulateData` function in our R script file. Note that we use R v.`r paste(sessionInfo()$R.version$major, sessionInfo()$R.version$minor, sep = ".")` [@rcoreteamLanguageEnvironmentStatistical2021] for all our analyses.
+All of this is operationalized with the `simulateData` function in our R script file, "1_R functions.R". 
+We use R v.`r paste(sessionInfo()$R.version$major, sessionInfo()$R.version$minor, sep = ".")` [@rcoreteamLanguageEnvironmentStatistical2021] for all our analyses.
 
 ```{r, echo = FALSE, message = FALSE, cache = TRUE, eval = FALSE}
 # need to do parallel computing for the simulations
@@ -398,7 +399,7 @@ for(psi.index in seq_along(psi.sim)){
 ```
 
 When assessing relative bias using the mean parameter estimate over all `r n.iter` iterations for each pairwise combination of $\psi$ and $\lambda$, results show that $\hat{\psi}$ is fairly unbiased, though there is a slight positive bias when true $\psi$ is 0.1 and when true $\lambda$ becomes more negative (Figure \ref{fig:sim}).
-This is due to a large number of simulated zero *Paranthropus* abundances across sites when true $\psi$ is low (i.e., low proportion of sites with true *Paranthropus* presences) and true $\lambda$ is very negative (i.e., probability density of *Paranthropus* relative abundance across sites is concentrated more towards zero; Figure \ref{fig:sim_beta}). 
+This is due to a large number of simulated zero *Paranthropus* abundances across sites when true $\psi$ is low (i.e., low proportion of sites with true *Paranthropus* presences) and true $\lambda$ is very negative (i.e., probability density of *Paranthropus* sampling probability across sites is concentrated more towards zero; Figure \ref{fig:sim_beta}). 
 As a result, the model is interpreting some of the observed zero abundances as unsampled presences, hence the larger $\hat{\psi}$'s.
 Indeed, larger $\hat{\psi}$'s are associated with more negative $\hat{\lambda}$'s (Figure \ref{fig:p_lambda}): $\lambda$'s are only estimated for those sites where *Paranthropus* is inferred to be present, and very negative $\hat{\lambda}$'s are associated with more unsampled presences.
 Overall, however, the relative bias for $\hat{\psi}$ is small (range: `r round(min(psi.bias.mean), 2)` to `r round(max(psi.bias.mean), 2)`).
@@ -454,7 +455,7 @@ ggplot(data = melt_res, aes(x = as.factor(Var1), y = as.factor(Var2), fill = val
         legend.text.align = 1)
 ```
 
-```{r, echo = FALSE, fig.cap = "Scatterplot showing the negative relationship between $\\hat{\\lambda}$ as a function of $\\hat{\\psi}$ for simulations when true $\\psi = 0.1$ and true $\\lambda = -200$. Those iterations where $\\hat{\\lambda}$ are unstable are excluded (see Section \\ref{sec:sim}) . \\label{fig:p_lambda}"}
+```{r, echo = FALSE, fig.cap = "Scatter plot showing the negative relationship between $\\hat{\\lambda}$ as a function of $\\hat{\\psi}$ for simulations when true $\\psi = 0.1$ and true $\\lambda = -200$. Those iterations where $\\hat{\\lambda}$ are unstable are excluded (see Section \\ref{sec:sim}) . \\label{fig:p_lambda}"}
 unstable.lambda <- sim.res[[1]][[1]][, 2] < -1e6
 
 par(mar = c(5, 4.5, 4, 2) + 0.1)
@@ -464,12 +465,12 @@ plot(sim.res[[1]][[1]][!unstable.lambda, 1], sim.res[[1]][[1]][!unstable.lambda,
 
 The relative bias of $\hat{\lambda}$, when calculated using the mean of all `r n.iter` iterations, becomes more negative as true $\psi$ decreases (Figure \ref{fig:sim}).
 This is again due to the increased number of simulated *Paranthropus* zero abundances across sites, which the model falsely interprets as unsampled presences (see previous paragraph).
-The gray column in Figure \ref{fig:sim} when true $\psi = 0.1$ denotes $\hat{\lambda}$'s that are extremely negative (i.e., `r sim.res[[1]][[1]][1, 2]`).
+The gray column in Figure \ref{fig:sim} when true $\psi = 0.1$ denotes $\hat{\lambda}$'s that are extremely negative (e.g., `r round(sim.res[[1]][[1]][1, 2])`).
 This occurs when simulated *Paranthropus* abundances are zero across *all* sites, as might happen when true $\psi$ is small and true $\lambda$ is very negative.
 Zero abundances across sites means there is no information from which to distinguish true absences and presences, resulting in unstable, very negative $\hat{\lambda}$'s.
 Figure \ref{fig:neg} shows a negative linear relationship between true $\lambda$ and the number of unstable $\hat{\lambda}$'s (out of `r n.iter` iterations for each unique true $\lambda$), which is to be expected if more negative true $\lambda$'s lead to a higher probability of all sites having simulated *Paranthropus* abundances that are zero. 
 
-```{r, echo = FALSE, fig.cap = "Scatterplot showing the negative linear relationship between the number of unstable, extremely negative $\\hat{\\lambda}$'s as a function of how negative true $\\lambda$ is. Unstable $\\hat{\\lambda}$'s occur only when simulated *Paranthropus* abundances are zero across all sites (see Section \\ref{sec:sim}). \\label{fig:neg}"}
+```{r, echo = FALSE, fig.cap = "Scatter plot showing the negative linear relationship between the number of unstable, extremely negative $\\hat{\\lambda}$'s as a function of how negative true $\\lambda$ is. Unstable $\\hat{\\lambda}$'s occur only when simulated *Paranthropus* abundances are zero across all sites (see Section \\ref{sec:sim}). Each point's number of $\\hat{\\lambda}$'s is out of 1000 iterations, so the frequency of simulations with zero abundances across all sites is small. \\label{fig:neg}"}
 neg.lamb <- sapply(sim.res[[1]], function(x) sum(x[, 2] < -1e6)) # count those iterations where estimated lambda is extremely negative
 
 par(mar = c(5, 4.5, 4, 2) + 0.1)
@@ -481,14 +482,14 @@ When using the median parameter estimate, instead of the mean, across all `r n.i
 The slight positive relative bias in $\hat{\psi}$ using the mean, and when true $\psi = 0.1$ and true $\lambda$ is very negative, disappears because the sampling distribution of $\hat{\psi}$ is right skewed when the true value is close to its lower bound (i.e, zero); such a skewed distribution "drags" the mean upwards, but the median is less affected.
 
 Relative bias of $\hat{\lambda}$ when using the median across all `r n.iter` iterations is only notable when true $\psi = 0.1$, and this bias is still small overall (largest relative bias is `r round(min(lambda.bias.median), 2)`) (Figure \ref{fig:sim}). 
-This pattern can again be attributed to the large number of simulated *Paranthropus* abundances that are zero across all sites, which the model is mistaking for unsampled presences.
+This pattern can again be attributed to those iterations where *Paranthropus* abundances are zero across all sites, which the model is mistaking for unsampled presences.
 The unstable, extremely negative $\hat{\lambda}$'s disappear (gray column in Figure \ref{fig:sim}) because this happened rarely across all `r n.iter` iterations (Figure \ref{fig:neg}), such that $\hat{\lambda}$ is not affected by these few outliers when the median is used.
 
 In sum, the model produces relatively unbiased parameter estimates except when there are a lot of zero *Paranthropus* abundances in the data, as to be expected (i.e., it is difficult to produce robust parameter estimates when there are not a lot of *Paranthropus* abundances to work with). 
 The result is that the model is mistaking true absences as unsampled presences, causing $\hat{\lambda}$ to be too negative (Figure \ref{fig:sim}).
 However, this bias is still small in determining the overall shape of the beta distribution.
-For example, the largest relative bias when using the median (`r round(min(lambda.bias.median), 2)`) occurs when $\psi = 0.1$ and $\lambda = -1$. 
-This means median $\hat{\lambda}$ is too low by `r abs(round(min(lambda.bias.median) * -1, 2))` (i.e., median $\hat{\lambda}$ = `r -1 - abs(round(min(lambda.bias.median) * -1, 2))`).
+For example, the largest relative bias when using the median (`r round(min(lambda.bias.median), 2)`) occurs when $\psi$ = `r melt_res[which.min(melt_lambda.bias.median$value), 1]` and $\lambda$ = `r melt_res[which.min(melt_lambda.bias.median$value), 2]`. 
+This means median $\hat{\lambda}$ is too low by `r abs(round(min(lambda.bias.median) * -1, 2))` (i.e., median $\hat{\lambda}$ = `r melt_res[which.min(melt_lambda.bias.median$value), 2] + round(min(lambda.bias.median), 2)`).
 This does not change the estimated shape of the beta distribution in any meaningful way (cf. Figure \ref{fig:sim_beta}).
 Either way, our main analysis gives $\hat{\psi}$ = `r round(psi_hat, 2)`, where $\hat{\lambda}$ is expected to have a negligible bias (Figure \ref{fig:sim}).
 
@@ -551,11 +552,11 @@ When exponentiated, the intercept is `r round(exp(glm.PA$coefficients[1]), 2)`, 
 The exponentiated coefficients for "scale(temporal distance)" and "scale(spatial distance)" are `r round(exp(glm.PA$coefficients[2]), 2)` and `r round(exp(glm.PA$coefficients[3]), 2)`, respectively. 
 Thus, when holding spatial distance constant, a one standard deviation increase in temporal distance results in a `r abs(1 - round(exp(glm.PA$coefficients[2]), 2)) * 100`% *increase* in the odds of *Paranthropus* presence/absence states matching, opposite the direction we would expect. 
 Holding temporal distance constant, a one standard deviation increase in spatial distance leads to a `r abs(1 - round(exp(glm.PA$coefficients[3]), 2)) * 100`% decrease in the odds of *Paranthropus* presence/absence states matching. 
-This translates to a decrease in odds from `r round(exp(glm.PA$coefficients[1]), 2)` to `r round(exp(glm.PA$coefficients[1]) * exp(glm.PA$coefficients[3]), 2)` when the variable "scale(spatial distance)" increases from 0 to 1 (while setting the other variables to zero).
+This translates to a decrease in odds from `r round(exp(glm.PA$coefficients[1]), 2)` to `r round(exp(glm.PA$coefficients[1]) * exp(glm.PA$coefficients[3]), 2)` when the variable "scale(spatial distance)" increases from 0 to 1 (while holding temporal distance constant).
 However, because we centered and scaled the data prior to analysis, this increase is quite substantial (Figure \ref{fig:spat_dist}).
 In sum, there appears to be no temporal autocorrelation in *Paranthropus* presence/absence states, but there might be some slight spatial autocorrelation.
 
-Even if the assumption of non-independence is violated and there is some spatial autocorrelation, our likelihood function is what is called a composite-likelihood, and the parameter estimates are consistent (i.e. they will converge to the true values as the sample size approaches infinity) [@lindsayCompositeLikelihoodMethods1988]. The impact of such autocorrelation would be to increase the variance of the parameter estimates and decrease their efficiency (i.e., the speed at which the estimates converge to their true values). However, based on the analysis above, it seems that the spatial autocorrelation is small and this effect will be minimal.
+Even if the assumption of non-independence is violated and there is some spatial autocorrelation, our likelihood function is what is called a composite-likelihood, and the parameter estimates are consistent (i.e. they will converge to the true values as the sample size approaches infinity) [@lindsayCompositeLikelihoodMethods1988]. The impact of such autocorrelation would be to increase the variance of the parameter estimates and decrease their efficiency (i.e., the speed at which the estimates converge to their true values). However, based on the analysis above, it seems that spatial autocorrelation is small and this effect will be minimal.
 
 ```{r, echo = FALSE, fig.cap = "Histogram of the centered and scaled spatial distances between every pairwise combination of sites. Centering the data results in a mean of zero, while scaling transforms the data into standard deviation units. \\label{fig:spat_dist}"}
 hist(scale(spatial.dist), xlab = "scale(spatial distance)", ylab = "Numbers of pairs of sites", col = "gray", main = "")
@@ -564,16 +565,15 @@ hist(scale(spatial.dist), xlab = "scale(spatial distance)", ylab = "Numbers of p
 
 ### Regarding $\lambda$
 
-Regarding assumption #1 in estimating $\lambda$, this would be violated if true *Paranthropus* relative abundance is spatiotemporally autocorrelated across sites. 
-That is, sites that are closer together in space and/or time are more likely to have similar *Paranthropus* relative abundance values. 
-As with *Paranthropus* presence/absence before, we take observed *Paranthropus* relative abundances across sites and assume that they reflect true relative abundances.
-This assumption is safer than the previous one concerning presence/absence data, given that observed relative abundances track their true counterparts but with a positive bias that increases as a function of taxon rarity and sampling incompleteness [@chaoUnveilingSpeciesrankAbundance2015].
-We then consider all pairwise comparisons of sites in terms of their (1) differences in observed *Paranthropus* relative abundance and (2) temporal and spatial distances from each other. 
-As with the the presence/absence logistic regression, we model (1) as a function of (2) with an interaction between the centered and scaled independent variables, but this time using multiple ordinary least square regression.
+Regarding assumption #1 in estimating $\lambda$, this would be violated if *Paranthropus* sampling probability is spatiotemporally autocorrelated across sites. 
+That is, sites that are closer together in space and/or time are more likely to have similar *Paranthropus* sampling probability values. 
+As mentioned in the main text, *Paranthropus* sampling probability at site $i$ can be equated to its observed relative abundance at that site.
+We consider all pairwise comparisons of sites in terms of their (1) differences in observed *Paranthropus* relative abundance and (2) temporal and spatial distances from each other. 
+As with the the presence/absence logistic regression, we model (1) as a function of (2) with an interaction between the centered and scaled independent variables, but this time using multiple ordinary least squares regression.
 Again, the goal is to assess whether sites that are closer together in time and/or space are more similar in their observed *Paranthropus* relative abundances.
 
 Table \ref{tab:lm_tab} shows that all regression coefficients are small, and the multiple $R^2$ of the entire model is only `r round(summary(lm.rel.abund)$r.squared, 2)`. 
-Considering all pairwise comparisons between sites, Figure \ref{fig:autocorr} plots observed *Paranthropus* relative abundance difference as a function of temporal (Figure \ref{fig:autocorr}A) or spatial (Figure \ref{fig:autocorr}B) distance. 
+Considering all pairwise comparisons between sites, Figure \ref{fig:autocorr} plots observed *Paranthropus* relative abundance differences as a function of temporal (Figure \ref{fig:autocorr}A) or spatial (Figure \ref{fig:autocorr}B) distances. 
 We expect the relationships to be positive, where sites that are further away temporally or spatially are expected to have more dissimilar relative abundance values. 
 The observed relationships are in fact *negative* (Figure \ref{fig:autocorr}), opposite the expected direction.
 Therefore, it appears that observed *Paranthropus* relative abundances across sites are not spatiotemporally autocorrelated. 
@@ -584,7 +584,7 @@ Therefore, it appears that observed *Paranthropus* relative abundances across si
 knitr::kable(round(lm.df, 3), caption = "Coefficient estimates for the multiple logistic (presence-absence) and multiple ordinary least squares (relative abundance) regression models. \"scale\" indicates that these independent variables were centered and scaled prior to fitting the models. \\label{tab:lm_tab}")
 ```
 
-```{r, echo = FALSE, fig.cap = "Scatter plots of observed *Paranthropus* relative abundance difference as a function of (A) temporal distance and (B) spatial distance for all pairwise comparisons of sites. $\\rho$ is the Spearman's rank correlation coefficient. \\label{fig:autocorr}"}
+```{r, echo = FALSE, fig.cap = "Scatter plots of observed *Paranthropus* relative abundance differences as a function of (A) temporal distance and (B) spatial distance for all pairwise comparisons of sites. $\\rho$ is the Spearman's rank correlation coefficient. \\label{fig:autocorr}"}
 par(mfrow = c(1, 2), mar = c(5, 4, 4, 0) + 0.1)
 
 plot(time.dist, RA.dist, main = "", xlab = "Temporal distance (millions of years)", ylab = expression(italic(Paranthropus) ~ "relative abundance difference"), cex.axis = 0.8, cex.lab = 0.8)
@@ -926,7 +926,7 @@ for(i in seq_along(omo.counts)){
 ```
 
 Assumption #2 would be violated if multiple specimens belonged to the same individual (e.g., a partial skeleton), and this was the case for a large portion of specimens at each site. 
-Non-independence would artificially inflate the number of independent data points for each site, which would bias posterior probabilities of absence upwards.
+Non-independence would artificially inflate the number of independent specimens for each site, which would bias posterior probabilities of absence upwards.
 We assessed independence of specimen data for those sites where data on the number of specimens per individual are available (i.e., databases). 
 Results show that the majority of individuals at each site are comprised of one specimen (Figure \ref{fig:freq_dist}).
 In fact, for each site, the proportion of individuals made up of one specimen exceeds 0.8, except for Member G of the Shungura Formation (`r round(omo.counts$G[1] / sum(omo.counts$G), 2)`) (Figure \ref{fig:prop_one}).

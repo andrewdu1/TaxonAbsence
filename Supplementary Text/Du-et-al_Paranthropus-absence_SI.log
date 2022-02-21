@@ -1,96 +1,89 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.2.16)  17 FEB 2022 14:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.7.9)  20 FEB 2022 22:05
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**Du-et-al_Paranthropus-absence_SI.tex
-(./Du-et-al_Paranthropus-absence_SI.tex
-LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-02-05> (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-d
-ist/tex/latex/base/article.cls
-Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+**./Du-et-al_Paranthropus-absence_SI.tex
+(Du-et-al_Paranthropus-absence_SI.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-06-18> (C:\Users\adu\AppData\Local\Programs\MiKTeX\t
+ex/latex/base\article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
-\c@part=\count185
-\c@section=\count186
-\c@subsection=\count187
-\c@subsubsection=\count188
-\c@paragraph=\count189
-\c@subparagraph=\count190
-\c@figure=\count191
-\c@table=\count192
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
-\bibindent=\dimen138
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.st
-y
-Package: amsmath 2021/10/15 v2.17l AMS math features
+\bibindent=\dimen134
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
 \@mathmargin=\skip49
 For additional information on amsmath, use the `?' option.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2021/08/26 v2.01 AMS text
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
-\ex@=\dimen139
-)) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.st
-y
+\@emptytoks=\toks15
+\ex@=\dimen135
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen140
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2021/08/26 v2.02 operator names
+\pmbraise@=\dimen136
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count193
-LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count194
-\leftroot@=\count195
-LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count196
-\DOTSCASE@=\count197
-LaTeX Info: Redefining \ldots on input line 496.
-LaTeX Info: Redefining \dots on input line 499.
-LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box50
-\strutbox@=\box51
-\big@size=\dimen141
-LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count198
-\c@MaxMatrixCols=\count199
+\inf@bad=\count175
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count176
+\leftroot@=\count177
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count178
+\DOTSCASE@=\count179
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box45
+\strutbox@=\box46
+\big@size=\dimen137
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count180
+\c@MaxMatrixCols=\count181
 \dotsspace@=\muskip16
-\c@parentequation=\count266
-\dspbrk@lvl=\count267
-\tag@help=\toks17
-\row@=\count268
-\column@=\count269
-\maxfields@=\count270
-\andhelp@=\toks18
-\eqnshift@=\dimen142
-\alignsep@=\dimen143
-\tagshift@=\dimen144
-\tagwidth@=\dimen145
-\totwidth@=\dimen146
-\lineht@=\dimen147
-\@envbody=\toks19
+\c@parentequation=\count182
+\dspbrk@lvl=\count183
+\tag@help=\toks16
+\row@=\count184
+\column@=\count185
+\maxfields@=\count186
+\andhelp@=\toks17
+\eqnshift@=\dimen138
+\alignsep@=\dimen139
+\tagshift@=\dimen140
+\tagwidth@=\dimen141
+\totwidth@=\dimen142
+\lineht@=\dimen143
+\@envbody=\toks18
 \multlinegap=\skip50
 \multlinetaggap=\skip51
-\mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2938.
-LaTeX Info: Redefining \] on input line 2939.
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.st
-y
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
-Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
@@ -123,317 +116,300 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2022/02/03 v1.0f TeX engine tests
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 2.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
-File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks21
-\inpenc@posthook=\toks22
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks20
+\inpenc@posthook=\toks21
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/upquote/upquote.st
-y
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+)
+\MT@toks=\toks23
+\MT@count=\count187
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen144
+LaTeX Info: Redefining \textmicrotypecontext on input line 1354.
+\MT@listname@count=\count188
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.c
-fg
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdfte
+x.def
+File: microtype-pdftex.def 2019/11/18 v2.7d Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 914.
+LaTeX Info: Redefining \lslig on input line 914.
+\MT@outer@space=\skip52
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+File: microtype.cfg 2019/11/18 v2.7d microtype main configuration file (RS)
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
+Package: parskip 2020-06-15 v2.0f non-zero parskip adjustments
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count189
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 227.
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.sty
+Package: xurl 2020/01/24 v 0.09 modify URL breaks
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
+Package: bookmark 2019/12/03 v1.28 PDF bookmarks (HO)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.
-def
-File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
-)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
-Package xcolor Info: Model `RGB' extended on input line 1368.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.st
-y
-Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.st
-y
-Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexc
-mds.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.s
+ty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarer
-r.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.st
-y
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks23
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkey
-s.sty
-Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdef
-inekeys.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefineke
+ys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescap
-e.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.st
-y
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxma
-cro.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro.s
+ty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.st
-y
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.
-sty
-Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
-)
-\@linkdim=\dimen148
-\Hy@linkcounter=\count271
-\Hy@pagecounter=\count272
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+\@linkdim=\dimen145
+\Hy@linkcounter=\count190
+\Hy@pagecounter=\count191
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-la
-ngpatches.def
-File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
-nguages
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.st
-y
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.
-sty
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count273
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+\Hy@SavedSpaceFactor=\count192
+Package hyperref Info: Option `unicode' set `true' on input line 4338.
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2020-05-15 v7.00e Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4073.
-Package hyperref Info: Hyper figures OFF on input line 4192.
-Package hyperref Info: Link nesting OFF on input line 4197.
-Package hyperref Info: Hyper index ON on input line 4200.
-Package hyperref Info: Plain pages OFF on input line 4207.
-Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Hyper figures OFF on input line 4464.
+Package hyperref Info: Link nesting OFF on input line 4469.
+Package hyperref Info: Hyper index ON on input line 4472.
+Package hyperref Info: Plain pages OFF on input line 4479.
+Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count274
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip17
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
-LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen149
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package hyperref Info: Bookmarks ON on input line 4717.
+\c@Hy@tempcnt=\count193
+LaTeX Info: Redefining \url on input line 5076.
+\XeTeXLinkMargin=\dimen146
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintc
-alc.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.s
+ty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count275
-\Field@Width=\dimen150
-\Fld@charsize=\dimen151
-Package hyperref Info: Hyper figures OFF on input line 6076.
-Package hyperref Info: Link nesting OFF on input line 6081.
-Package hyperref Info: Hyper index ON on input line 6084.
-Package hyperref Info: backreferencing OFF on input line 6091.
-Package hyperref Info: Link coloring OFF on input line 6096.
-Package hyperref Info: Link coloring with OCG OFF on input line 6101.
-Package hyperref Info: PDF/A mode OFF on input line 6106.
-LaTeX Info: Redefining \ref on input line 6146.
-LaTeX Info: Redefining \pageref on input line 6150.
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.st
-y
-Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
-package with kernel methods
+\Fld@menulength=\count194
+\Field@Width=\dimen147
+\Fld@charsize=\dimen148
+Package hyperref Info: Hyper figures OFF on input line 6347.
+Package hyperref Info: Link nesting OFF on input line 6352.
+Package hyperref Info: Hyper index ON on input line 6355.
+Package hyperref Info: backreferencing OFF on input line 6362.
+Package hyperref Info: Link coloring OFF on input line 6367.
+Package hyperref Info: Link coloring with OCG OFF on input line 6372.
+Package hyperref Info: PDF/A mode OFF on input line 6377.
+LaTeX Info: Redefining \ref on input line 6417.
+LaTeX Info: Redefining \pageref on input line 6421.
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/atbegshi\atbegshi.sty
+Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count276
-\c@Item=\count277
-\c@Hfootnote=\count278
+\Hy@abspage=\count195
+\c@Item=\count196
+\c@Hfootnote=\count197
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.s
-ty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
-kage
-with kernel methods
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/atveryend\atveryend.sty
+Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 )
-\Fld@listcount=\count279
-\c@bookmark@seq@number=\count280
+\Fld@listcount=\count198
+\c@bookmark@seq@number=\count199
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerun
-filecheck.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilec
+heck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniq
-uecounter.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecou
+nter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip52
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.st
-y
+\Hy@SectionHShift=\skip53
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
+File: bkm-pdftex.def 2019/12/03 v1.28 bookmark driver for pdfTeX (HO)
+\BKM@id=\count266
+)) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count281
-\Gm@cntv=\count282
-\c@Gm@tempcnt=\count283
-\Gm@bindingoffset=\dimen152
-\Gm@wd@mp=\dimen153
-\Gm@odd@mp=\dimen154
-\Gm@even@mp=\dimen155
-\Gm@layoutwidth=\dimen156
-\Gm@layoutheight=\dimen157
-\Gm@layouthoffset=\dimen158
-\Gm@layoutvoffset=\dimen159
+\Gm@cnth=\count267
+\Gm@cntv=\count268
+\c@Gm@tempcnt=\count269
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks24
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.st
-y
-Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
-\LTleft=\skip53
-\LTright=\skip54
-\LTpre=\skip55
-\LTpost=\skip56
-\LTchunksize=\count284
-\LTcapwidth=\dimen160
-\LT@head=\box52
-\LT@firsthead=\box53
-\LT@foot=\box54
-\LT@lastfoot=\box55
-\LT@gbox=\box56
-\LT@cols=\count285
-\LT@rows=\count286
-\c@LT@tables=\count287
-\c@LT@chunks=\count288
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (
+C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count270
+\LTcapwidth=\dimen157
+\LT@head=\box47
+\LT@firsthead=\box48
+\LT@foot=\box49
+\LT@lastfoot=\box50
+\LT@cols=\count271
+\LT@rows=\count272
+\c@LT@tables=\count273
+\c@LT@chunks=\count274
 \LT@p@ftn=\toks25
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.st
-y
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen161
-\lightrulewidth=\dimen162
-\cmidrulewidth=\dimen163
-\belowrulesep=\dimen164
-\belowbottomsep=\dimen165
-\aboverulesep=\dimen166
-\abovetopsep=\dimen167
-\cmidrulesep=\dimen168
-\cmidrulekern=\dimen169
-\defaultaddspace=\dimen170
-\@cmidla=\count289
-\@cmidlb=\count290
-\@aboverulesep=\dimen171
-\@belowrulesep=\dimen172
-\@thisruleclass=\count291
-\@lastruleclass=\count292
-\@thisrulewidth=\dimen173
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
-\col@sep=\dimen174
-\ar@mcellbox=\box57
-\extrarowheight=\dimen175
+\heavyrulewidth=\dimen158
+\lightrulewidth=\dimen159
+\cmidrulewidth=\dimen160
+\belowrulesep=\dimen161
+\belowbottomsep=\dimen162
+\aboverulesep=\dimen163
+\abovetopsep=\dimen164
+\cmidrulesep=\dimen165
+\cmidrulekern=\dimen166
+\defaultaddspace=\dimen167
+\@cmidla=\count275
+\@cmidlb=\count276
+\@aboverulesep=\dimen168
+\@belowrulesep=\dimen169
+\@thisruleclass=\count277
+\@lastruleclass=\count278
+\@thisrulewidth=\dimen170
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen171
+\ar@mcellbox=\box51
+\extrarowheight=\dimen172
 \NC@list=\toks26
-\extratabsurround=\skip57
-\backup@length=\skip58
-\ar@cellbox=\box58
-) (c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box52
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count293
-\calc@Bcount=\count294
-\calc@Adimen=\dimen176
-\calc@Bdimen=\dimen177
-\calc@Askip=\skip59
-\calc@Bskip=\skip60
+\calc@Acount=\count279
+\calc@Bcount=\count280
+\calc@Adimen=\dimen173
+\calc@Bdimen=\dimen174
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count295
-\calc@Cskip=\skip61
+\calc@Ccount=\count281
+\calc@Cskip=\skip62
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.st
-y
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count296
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/footnotehyper\footnotehyp
+er.sty
+Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
+\FNH@notes=\box53
+\FNH@width=\dimen175
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.st
-y
-Package: footnote 1997/01/28 1.13 Save footnotes around boxes
-\fn@notes=\box59
-\fn@width=\dimen178
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.st
-y
-Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.st
-y
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-)
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphic
-s.cfg
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 107.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen179
-\Gin@req@width=\dimen180
+\Gin@req@height=\dimen176
+\Gin@req@width=\dimen177
 )
-\cslhangindent=\skip62
-\csllabelwidth=\skip63
-\cslentryspacingunit=\skip64
+\cslhangindent=\skip63
+\csllabelwidth=\skip64
+\cslentryspacingunit=\skip65
 
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-
-pdftex.def
-File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count297
-\l__pdf_internal_box=\box60
-) (./Du-et-al_Paranthropus-absence_SI.aux)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdfmo
+de.def
+File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count282
+\l__pdf_internal_box=\box54
+) (Du-et-al_Paranthropus-absence_SI.aux)
 \openout1 = `Du-et-al_Paranthropus-absence_SI.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
@@ -454,41 +430,57 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
 LaTeX Font Info:    ... okay on input line 104.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
 LaTeX Font Info:    ... okay on input line 104.
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopd
-f-base.sty
+LaTeX Info: Redefining \microtypecontext on input line 104.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `basictext'.
+LaTeX Info: Redefining \showhyphens on input line 104.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count283
+\scratchdimen=\dimen178
+\scratchbox=\box55
+\nofMPsegments=\count284
+\nofMParguments=\count285
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count286
+\MPscratchDim=\dimen179
+\MPnumerator=\count287
+\makeMPintoPDFobject=\count288
+\everyMPtoPDFconversion=\toks28
+)
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-bas
+e.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf
--sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
+)
+\AtBeginShipoutBox=\box56
 Package hyperref Info: Link coloring OFF on input line 104.
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
-
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.st
-y
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/get
-titlestring.sty
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitle
+string.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count298
+\c@section@level=\count289
 )
 LaTeX Info: Redefining \ref on input line 104.
 LaTeX Info: Redefining \pageref on input line 104.
 LaTeX Info: Redefining \nameref on input line 104.
-(./Du-et-al_Paranthropus-absence_SI.out) (./Du-et-al_Paranthropus-absence_SI.ou
-t)
-\@outlinefile=\write3
-\openout3 = `Du-et-al_Paranthropus-absence_SI.out'.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -525,23 +517,23 @@ t)
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 06.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
-File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
 06.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
 106.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
 106.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <12> on input line 106.
@@ -551,14 +543,18 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 106.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 106
 .
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 106
 .
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./Du-et-al_Paranthropus-absence_SI.toc
+) (C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) (Du-et-al_Paranthropus-absence_SI.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -566,15 +562,14 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 2.
 )
-\tf@toc=\write4
-\openout4 = `Du-et-al_Paranthropus-absence_SI.toc'.
+\tf@toc=\write3
+\openout3 = `Du-et-al_Paranthropus-absence_SI.toc'.
 
 [1
 
-{c:/Users/adu/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.
-map}]
+{C:/Users/adu/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-1-1.pdf, id=
-72, 469.755pt x 325.215pt>
+41, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-1-1.pdf
  Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-1-1.pdf>
@@ -589,7 +584,7 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 283.
 
-<Model flow chart.pdf, id=104, 1413.1669pt x 954.32254pt>
+<Model flow chart.pdf, id=74, 1413.1669pt x 954.32254pt>
 File: Model flow chart.pdf Graphic file (type pdf)
 <use Model flow chart.pdf>
 Package pdftex.def Info: Model flow chart.pdf  used on input line 309.
@@ -597,11 +592,11 @@ Package pdftex.def Info: Model flow chart.pdf  used on input line 309.
 [4] [5 <./Model flow chart.pdf>] [6] [7]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
 35.
-(c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+(C:\Users\adu\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-5-1.pdf, id=
-217, 469.755pt x 325.215pt>
+187, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-5-1.pdf
  Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-5-1.pdf>
@@ -609,10 +604,8 @@ File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-5-1.pdf
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
 named-chunk-5-1.pdf  used on input line 569.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[8] [9 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-5-1
-.pdf>]
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-8-1.pdf, id=
-244, 469.755pt x 325.215pt>
+191, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-8-1.pdf
  Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-8-1.pdf>
@@ -621,7 +614,7 @@ Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
 named-chunk-8-1.pdf  used on input line 600.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-9-1.pdf, id=
-249, 469.755pt x 325.215pt>
+196, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-9-1.pdf
  Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-9-1.pdf>
@@ -629,8 +622,12 @@ File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-9-1.pdf
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
 named-chunk-9-1.pdf  used on input line 619.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[8] [9 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-5-1
+.pdf>] [10 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk
+-8-1.pdf>] [11 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-c
+hunk-9-1.pdf>]
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-10-1.pdf, id
-=255, 469.755pt x 325.215pt>
+=246, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-10-1.pd
 f Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-10-1.pdf
@@ -638,95 +635,94 @@ f Graphic file (type pdf)
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
 named-chunk-10-1.pdf  used on input line 648.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[10 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-8-1.pd
-f>] [11 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-9-
-1.pdf>] [12 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chun
-k-10-1.pdf>] [13]
+[12 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-10-1.p
+df>] [13]
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-13-1.pdf, id
-=314, 469.755pt x 325.215pt>
+=281, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-13-1.pd
 f Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-13-1.pdf
 >
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
-named-chunk-13-1.pdf  used on input line 790.
+named-chunk-13-1.pdf  used on input line 792.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [14 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-13-1.p
 df>] [15]
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-15-1.pdf, id
-=336, 469.755pt x 325.215pt>
+=303, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-15-1.pd
 f Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-15-1.pdf
 >
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
-named-chunk-15-1.pdf  used on input line 860.
+named-chunk-15-1.pdf  used on input line 857.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [16 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-15-1.p
 df>]
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-17-1.pdf, id
-=353, 469.755pt x 614.295pt>
+=320, 469.755pt x 614.295pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-17-1.pd
 f Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-17-1.pdf
 >
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
-named-chunk-17-1.pdf  used on input line 899.
+named-chunk-17-1.pdf  used on input line 896.
 (pdftex.def)             Requested size: 469.75386pt x 614.29349pt.
 
-LaTeX Warning: Float too large for page by 0.36348pt on input line 903.
+LaTeX Warning: Float too large for page by 0.36348pt on input line 900.
 
 <Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-19-1.pdf, id
-=354, 469.755pt x 325.215pt>
+=321, 469.755pt x 325.215pt>
 File: Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-19-1.pd
 f Graphic file (type pdf)
 <use Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-19-1.pdf
 >
 Package pdftex.def Info: Du-et-al_Paranthropus-absence_SI_files/figure-latex/un
-named-chunk-19-1.pdf  used on input line 907.
+named-chunk-19-1.pdf  used on input line 904.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [17] [18 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-chunk-1
 7-1.pdf>] [19 <./Du-et-al_Paranthropus-absence_SI_files/figure-latex/unnamed-ch
-unk-19-1.pdf>] [20] (./Du-et-al_Paranthropus-absence_SI.aux)
-Package rerunfilecheck Info: File `Du-et-al_Paranthropus-absence_SI.out' has no
-t changed.
-(rerunfilecheck)             Checksum: 102977ADF6CC76A9CFC6D60D34D3C2BC;2060.
+unk-19-1.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 967.
+[20]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 967.
+(Du-et-al_Paranthropus-absence_SI.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 967.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 967.
  ) 
 Here is how much of TeX's memory you used:
- 11426 strings out of 480238
- 182384 string characters out of 5894435
- 474337 words of memory out of 5000000
- 29074 multiletter control sequences out of 15000+600000
- 529361 words of font info for 71 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 60i,16n,63p,1141b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
-}{c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.
-enc}{c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.e
-nc}{c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathe
-x.enc}{c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ma
-thsy.enc}<c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm
-/lmbx10.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public
-/lm/lmbx12.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pub
-lic/lm/lmex10.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/
-public/lm/lmmi10.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/typ
-e1/public/lm/lmmi5.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmmi7.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fonts
-/type1/public/lm/lmr10.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/fon
-ts/type1/public/lm/lmr12.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmr17.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmr7.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-dis
-t/fonts/type1/public/lm/lmri10.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/texmf-
-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/tex
-mf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/adu/AppData/Roaming/TinyTeX/
-texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/adu/AppData/Roaming/TinyTe
-X/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/adu/AppData/Roaming/Tin
-yTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Du-et-al_Paranthropus-absence_SI.pdf (20 pages, 577150 bytes)
+ 13583 strings out of 480790
+ 203762 string characters out of 2898240
+ 497401 words of memory out of 3000000
+ 29075 multiletter control sequences out of 15000+200000
+ 601412 words of font info for 159 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 44i,16n,42p,1143b,337s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/adu/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/
+Users/adu/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Us
+ers/adu/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/ad
+u/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/adu/
+AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}<C:/Users/adu/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/adu/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/adu/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/adu/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/adu/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/adu/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/adu/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/adu/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/adu/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/adu/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/adu/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmri10.pfb><C:/Users/adu/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/lm/lmri12.pfb><C:/Users/adu/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/lm/lmsy10.pfb><C:/Users/adu/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/lm/lmsy7.pfb><C:/Users/adu/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/lm/lmtt10.pfb><C:/Users/adu/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Du-et-al_Paranthropus-absence_SI.pdf (20 pages, 615763 bytes)
 .
 PDF statistics:
- 503 PDF objects out of 1000 (max. 8388607)
- 407 compressed objects within 5 object streams
- 98 named destinations out of 1000 (max. 500000)
- 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 478 PDF objects out of 1000 (max. 8388607)
+ 97 named destinations out of 1000 (max. 500000)
+ 12419 words of extra memory for PDF output out of 14400 (max. 10000000)
 
