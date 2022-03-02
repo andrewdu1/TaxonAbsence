@@ -240,7 +240,7 @@ Instead, we will numerically solve for $\lambda_{max}$ in Equation \ref{E_likeli
 We are now in a conundrum: if we knew the parameters $\psi$ and $\lambda$, we could compute the posterior probability $\tau_i$ (Equation \ref{tau}), which is what we are ultimately interested in. 
 If we knew $\tau_i$, we could compute the parameters $\psi$ (Equation \ref{psi_max}) and $\lambda$ (numerical optimization of Equation \ref{E_likelihood}). 
 In fact, we can alternate performing each of these steps iteratively, which constitutes an algorithm known as *expectation-maximization* (EM). 
-The EM algorithm is a standard numerical method used to compute the maximum likelihood estimates of parameters for models with unobserved latent variables (e.g., $Z_i$) [@searleVarianceComponents2006].
+The EM algorithm is a standard numerical method used to compute the maximum likelihood estimates of parameters for models with unobserved latent variables (e.g., $Z_i$) [@carlinBayesEmpiricalBayes2000; @searleVarianceComponents2006].
 In the EM algorithm, we:
 
 1) Take initial guesses of $\psi$ and $\lambda$ (call them $(\psi^{(0)}, \lambda^{(0)})$).
