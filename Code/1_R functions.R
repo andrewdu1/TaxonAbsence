@@ -64,13 +64,13 @@ lambda_Mstep <- function(X, n, psi, lambda, tau_res){
   return(sum(tau_res * log(dbetabinom)))
 }
 
-# primary function for the EM algorithm
+# primary function for the EM algorithm (Eq. S14)
   # ARGUMENTS:
     # X: number of successes (# Paranthropus specimens)
     # n: number of trials (# total mammalian specimens)
     # psi.init: initial guess for psi
     # lambda.init: initial guess for lambda
-    # n.step.max: number of maximum steps for the optimazation     process. Only used for our simulations.
+    # n.step.max: number of maximum steps for the optimization process. Only used for our simulations.
 EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
   
   # step 1: calculate expected log-likelihood given initial guesses of psi and lambda
@@ -131,7 +131,7 @@ EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
 # function for simulating number of Paranthropus specimens data with known psi and lambda
   # ARGUMENTS:
     # n_sites: number of sites
-    # n_mammSpec: vector of number of total mammalian specimens     from each site
+    # n_mammSpec: vector of number of total mammalian specimens from each site
     # psi: psi parameter (probability that a site truly has     Paranthropus)
     # lambda: shape parameter for beta-binomial pdf
 simulateData <- function(n_sites, n_mammSpec, psi, lambda){
