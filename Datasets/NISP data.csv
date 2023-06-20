@@ -20,24 +20,28 @@ Ethiopia,Omo Shungura,NA,H,5,36,1.8,McDougall et al. 2012,0,1138,NA,Omo French &
 Ethiopia,Omo Shungura,NA,J,5,36,1.65,McDougall et al. 2012,0,358,NA,Omo French & American Databases,
 Ethiopia,Omo Shungura,NA,K,5,36,1.5,McDougall et al. 2012,1,678,Wood & Leakey 2011,Omo French & American Databases,
 Ethiopia,Omo Shungura,NA,L,5,36,1.2,McDougall et al. 2012,0,759,NA,Omo French & American Databases,
-Ethiopia,Konso,NA,Interval 1,5.3,37.4,1.85,Suwa et al. 2003,0,1881,NA,Suwa et al. in press,
-Ethiopia,Konso,NA,Interval 2,5.3,37.4,1.75,Suwa et al. 2003,0,57,NA,Suwa et al. in press,
-Ethiopia,Konso,NA,Interval 3,5.3,37.4,1.55,Suwa et al. 2003,0,488,NA,Suwa et al. in press,
-Ethiopia,Konso,NA,Interval 4,5.3,37.4,1.45,Suwa et al. 2003,10,3286,Suwa et al. 2003,Suwa et al. in press,
-Ethiopia,Konso,NA,Interval 5,5.3,37.4,1.35,Suwa et al. 2003,0,1988,NA,Suwa et al. in press,
-Ethiopia,Konso,NA,Interval 6,5.3,37.4,1,Suwa et al. 2003,0,125,NA,Suwa et al. in press,
+Ethiopia,Konso,NA,Interval 1,5.3,37.4,1.92,Katoh et al. 2014,0,1881,NA,Suwa et al. 2022,"For mean age, the tuff in the middle of the interval was chosen (Fig. 3.1 in Katoh et al. 2014); Mammal data from Table 22.2 in Suwa et al. 2022"
+Ethiopia,Konso,NA,Interval 2,5.3,37.4,1.74,Katoh et al. 2014,0,57,NA,Suwa et al. 2022,"For mean age, the tuff in the middle of the interval was chosen (Fig. 3.1 in Katoh et al. 2014); Mammal data from Table 22.2 in Suwa et al. 2022"
+Ethiopia,Konso,NA,Interval 3,5.3,37.4,1.63,Katoh et al. 2014,0,488,NA,Suwa et al. 2022,"For mean age, the tuff in the middle of the interval was chosen (Fig. 3.1 in Katoh et al. 2014); Mammal data from Table 22.2 in Suwa et al. 2022"
+Ethiopia,Konso,NA,Interval 4,5.3,37.4,1.45,Katoh et al. 2014,10,3286,Suwa et al. 2003,Suwa et al. 2022,"For mean age, the tuff in the middle of the interval was chosen (Fig. 3.1 in Katoh et al. 2014); Mammal data from Table 22.2 in Suwa et al. 2022"
+Ethiopia,Konso,NA,Interval 5,5.3,37.4,1.3,Katoh et al. 2014,0,1988,NA,Suwa et al. 2022,"For mean age, the tuff in the middle of the interval was chosen (Fig. 3.1 in Katoh et al. 2014); Mammal data from Table 22.2 in Suwa et al. 2022"
+Ethiopia,Konso,NA,Interval 6,5.3,37.4,0.87,Katoh et al. 2014,0,125,NA,Suwa et al. 2022,"For mean age, the tuff in the middle of the interval was chosen (Fig. 3.1 in Katoh et al. 2014); Mammal data from Table 22.2 in Suwa et al. 2022"
 Ethiopia,Melka Kunture,NA,Garba IV C-D,9.56,39.11,0.9,Werdelin 2010,0,822,NA,Denis Geraads (pers. comm.),
 Ethiopia,Melka Kunture,NA,Garba IV E-F,9.56,39.11,0.9,Werdelin 2010,0,153,NA,Denis Geraads (pers. comm.),
 Kenya,Koobi Fora,NA,upper Burgi,4,36.37,1.95,McDougall et al. 2012,7,4154,Wood & Leakey 2011; Turkana Basin Institute Database,Turkana Basin Institute Database,
-Kenya,Koobi Fora,NA,KBS,4,36.37,1.7,McDougall et al. 2012,120,3464,Wood & Leakey 2011; Turkana Basin Institute Database,Turkana Basin Institute Database,Paranthropus NISP inflated due to KNM-ER 3229 and KNM-ER 3952
+Kenya,Koobi Fora,NA,KBS,4,36.37,1.72,McDougall et al. 2012; Phillips et al. 2023,120,3464,Wood & Leakey 2011; Turkana Basin Institute Database,Turkana Basin Institute Database,Paranthropus NISP inflated due to KNM-ER 3229 and KNM-ER 3952; used Phillips et al. for age of KBS Tuff
 Kenya,Koobi Fora,NA,Okote,4,36.37,1.45,McDougall et al. 2012,33,1808,Wood & Leakey 2011; Green et al. 2018; Lague et al. 2019,Turkana Basin Institute Database,Paranthropus NISP inflated due to KNM-ER 733
-Kenya,Koobi Fora,NA,Chari,4,36.37,1.07,McDougall et al. 2012,0,44,NA,Turkana Basin Institute Database,
+Kenya,Koobi Fora,NA,Chari,4,36.37,1.05,McDougall et al. 2012; Phillips et al. 2023,0,44,NA,Turkana Basin Institute Database,Used Phillips et al. for date of Chari Tuff
 Kenya,Nachukui,NA,Lomekwi,3.93,35.77,3,McDougall et al. 2012,0,1245,NA,Turkana Basin Institute Database,
 Kenya,Nachukui,NA,Lokalalei,3.93,35.77,2.4,McDougall et al. 2012,5,75,"Wood & Leakey 2011; Turkana Basin Institute Database; Feibel, pers. comm.",Turkana Basin Institute Database,"KNM-WT 17000, 38351, & 38354 is in Lokalalei Mbr. (Feibel, pers. Comm.)"
 Kenya,Nachukui,NA,Kalochoro,3.93,35.77,2.1,McDougall et al. 2012,3,227,"Wood & Leakey 2011; Turkana Basin Institute Database; Feibel, pers. comm.",Turkana Basin Institute Database,"KNM-WT 38353 is in Kalochoro Mbr. (Feibel, pers. Comm.)"
 Kenya,Nachukui,NA,Kaitio,3.93,35.77,1.7,McDougall et al. 2012,5,202,Wood & Leakey 2011,Turkana Basin Institute Database,
 Kenya,Nachukui,NA,Natoo,3.93,35.77,1.43,McDougall et al. 2012,0,274,NA,Turkana Basin Institute Database,
 Kenya,Nachukui,NA,Nariokotome,3.93,35.77,1.03,McDougall et al. 2012,0,88,NA,Turkana Basin Institute Database,
+Kenya,Kanjera South,NA,KS-1,-0.34,34.54,2,Plummer et al. 2009,0,975,NA,Plummer et al. 2009,Mammal data from Table 12.1 (Plummer et al. 2009)
+Kenya,Kanjera South,NA,KS-2,-0.34,34.54,2,Plummer et al. 2009,0,2153,NA,Plummer et al. 2009,Mammal data from Table 12.1 (Plummer et al. 2009)
+Kenya,Kanjera South,NA,KS-3,-0.34,34.54,2,Plummer et al. 2009,0,470,NA,Plummer et al. 2009,Mammal data from Table 12.1 (Plummer et al. 2009)
+Kenya,Nyayanga,NA,NA,-0.4,34.45,2.81,Plummer et al. 2023,1,412,Plummer et al. 2023,Plummer et al. 2023,"Combined mammal data from Excavations 3 & 5 (Figure S4 in SI of Plummer et al. 2023); didn't analyze surface data, as those NISP were unavailable"
 Kenya,Chemeron,"BPRP 2,23,99,101,105,106,107,117,118,119,120,136,137,150,152,198,199,200,201,202,216,219",NA,-0.57,35.95,2.65,Goble 2012,0,363,NA,Goble 2012,
 Tanzania,Peninj,NA,Basal Sands with Clays,-2.83,35.67,1.6,Dominguez-Rodrigo et al. 2002,1,42,Leakey & Leakey 1964,Denis Geraads (pers. comm.),
 Tanzania,Peninj,NA,Main Tuff,-2.83,35.67,1.5,Dominguez-Rodrigo et al. 2002,0,22,NA,Denis Geraads (pers. comm.),
