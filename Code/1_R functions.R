@@ -5,20 +5,19 @@
 #######################
 
 # Author: Andrew Du & Eric Friedlander
-# Date: 1-12-22
 
 
-# function for the standard reflected beta-binomial pdf (eq. S6)
+# function for the beta-binomial pdf (eq. S6)
   # ARGUMENTS:
     # X: number of successes (# Paranthropus specimens)
     # n: number of trials (# total mammalian specimens)
     # lambda: shape parameter
-stdReflectBBpdf <- function(X, n, lambda){
+BBpdf <- function(X, n, lambda){
   
   require(rmutil)
   
-  m <- 1 / (2 - lambda)
-  s <- 2 - lambda
+  m <- 1 / (2 + lambda)
+  s <- 2 + lambda
   
   # where m*s is the first shape parameter of the beta distribution, and s * (1-m) is the second shape parameter
   
@@ -33,7 +32,7 @@ stdReflectBBpdf <- function(X, n, lambda){
     # lambda: standard reflected beta distribution shape parameter
 tau <- function(X, n, psi, lambda){
   
-  dbetabinom <- stdReflectBBpdf(X, n, lambda)
+  dbetabinom <- BBpdf(X, n, lambda)
   
   return((dbetabinom * psi) / ((X == 0) * (1 - psi) + dbetabinom * psi))
 }
@@ -45,7 +44,7 @@ Q <- function(X, n, psi, lambda){
   
   tau_res <- tau(X, n, psi, lambda)
   
-  dbetabinom <- stdReflectBBpdf(X, n, lambda)
+  dbetabinom <- BBpdf(X, n, lambda)
   
   return(sum((1 - tau_res) * log(1 - psi) + tau_res * (log(dbetabinom) + log(psi))))
 }
@@ -59,7 +58,7 @@ Q <- function(X, n, psi, lambda){
     # tau_res: results from using the tau() function
 lambda_Mstep <- function(X, n, psi, lambda, tau_res){
   
-  dbetabinom <- stdReflectBBpdf(X, n, lambda)
+  dbetabinom <- BBpdf(X, n, lambda)
   
   return(sum(tau_res * log(dbetabinom)))
 }
