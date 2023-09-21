@@ -5,7 +5,6 @@
 # #########################################
 
 # Author: Andrew Du
-# Date: 6-22-23
 
 # NB: The following code requires the GRAY_HR_SR.tif
 # file in the Datasets folder, but the file is too 
