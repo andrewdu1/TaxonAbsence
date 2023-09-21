@@ -11,7 +11,7 @@
   # ARGUMENTS:
     # X: number of successes (# Paranthropus specimens)
     # n: number of trials (# total mammalian specimens)
-    # lambda: shape parameter
+    # lambda: shape parameter (must be >=0)
 BBpdf <- function(X, n, lambda){
   
   require(rmutil)
