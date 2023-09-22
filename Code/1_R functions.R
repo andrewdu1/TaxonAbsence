@@ -32,9 +32,9 @@ BBpdf <- function(X, n, lambda){
     # lambda: standard reflected beta distribution shape parameter
 tau <- function(X, n, psi, lambda){
   
-  dbetabinom <- BBpdf(X, n, lambda)
+  dBB <- BBpdf(X, n, lambda)
   
-  return((dbetabinom * psi) / ((X == 0) * (1 - psi) + dbetabinom * psi))
+  return((dBB * psi) / ((X == 0) * (1 - psi) + dBB * psi))
 }
 
 # function for expected log-likelihood (eq. S11)
@@ -44,9 +44,9 @@ Q <- function(X, n, psi, lambda){
   
   tau_res <- tau(X, n, psi, lambda)
   
-  dbetabinom <- BBpdf(X, n, lambda)
+  dBB <- BBpdf(X, n, lambda)
   
-  return(sum((1 - tau_res) * log(1 - psi) + tau_res * (log(dbetabinom) + log(psi))))
+  return(sum((1 - tau_res) * log(1 - psi) + tau_res * (log(dBB) + log(psi))))
 }
 
 # function for estimating lambda in the expected log-likelihood (eq. S11) (to be numerically solved)
@@ -58,9 +58,9 @@ Q <- function(X, n, psi, lambda){
     # tau_res: results from using the tau() function
 lambda_Mstep <- function(X, n, psi, lambda, tau_res){
   
-  dbetabinom <- BBpdf(X, n, lambda)
+  dBB <- BBpdf(X, n, lambda)
   
-  return(sum(tau_res * log(dbetabinom)))
+  return(sum(tau_res * log(dBB)))
 }
 
 # primary function for the EM algorithm (Eq. S14)
