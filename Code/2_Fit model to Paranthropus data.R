@@ -5,7 +5,6 @@
 ##########################################
 
 # Author: Andrew Du & Eric Friedlander
-# Date: 1-12-22
 
 
 # Source R functions
@@ -19,7 +18,7 @@ X <- d$Paran_nisp # Paranthropus abundance
 n <- X + d$NonParanMamm_nisp # Total large mammalian abundance
 
 # Fit model using expectation-maximization algorithm
-EM.res <- EM(X = X, n = n, psi.init = 0.5, lambda.init = -5)
+EM.res <- EM(X = X, n = n, psi.init = 0.5, lambda.init = 10)
 
 # Get out estimated parameters
 psi_hat <- EM.res$psi_hat

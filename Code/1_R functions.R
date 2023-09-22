@@ -97,8 +97,8 @@ EM <- function(X, n, psi.init, lambda.init, n.step.max = NULL){
                         tau_res = tau.res, 
                         method = "L-BFGS-B", 
                         control = list(fnscale = -1), 
-                        lower = -Inf, 
-                        upper = 0)
+                        lower = 0, 
+                        upper = Inf)
     
     lambda.new <- lambda.opt$par[1]
     
