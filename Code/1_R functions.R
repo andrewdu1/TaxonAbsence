@@ -68,7 +68,9 @@ ZI.BB.mle <- function(psi.start, lambda.start, x, n, hessian = FALSE){
   names(param.hat) <- c("psi", "lambda")
   
   if(hessian){
-    return(list(param.hat, mle.res$hessian))
+    return(list(
+      param = param.hat, 
+      hessian = mle.res$hessian))
   } else {
     return(param.hat)
   }
