@@ -77,7 +77,7 @@ BB.fit <- optim(par = 10,
                 lower = 0,
                 upper = Inf,
                 control = list(
-                fnscale = -1
+                  fnscale = -1
                 ))
 
 ### save logL & k (# parameters)
