@@ -7,12 +7,12 @@
 # Author: Andrew Du & Eric Friedlander
 
 
-# function for the beta-binomial pdf (eq. SX)
+# function for the beta-binomial pmf (eq. SX)
   # ARGUMENTS:
     # x: number of successes (# Paranthropus specimens)
     # n: number of trials (# total mammalian specimens)
     # lambda: shape parameter (must be >=0)
-BBpdf <- function(x, n, lambda){
+BBpmf <- function(x, n, lambda){
   
   require(rmutil)
   
@@ -37,7 +37,7 @@ ZI.BB.logL <- function(x, n, param){
   psi <- param[1]
   lambda <- param[2]
   
-  f_B <- BBpdf(x, n, lambda)
+  f_B <- BBpmf(x, n, lambda)
   
   return(sum(log((x == 0) * (1 - psi) + f_B * psi)))
 }
