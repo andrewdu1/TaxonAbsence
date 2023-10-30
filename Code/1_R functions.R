@@ -126,6 +126,7 @@ boot_data <- function(x, n, n.iter = 1000, silent = FALSE){
     
     if(!silent) print(i)
   }
+  return(boot.res)
 }
 
 
