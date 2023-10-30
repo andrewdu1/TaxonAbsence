@@ -89,8 +89,48 @@ post_prob <- function(n, psi, lambda){
 }
 
 
-# function for simulating number of Paranthropus specimens
-# with known psi and lambda
+# Function for bootstrapping data for calculating CIs
+# of parameter estimates and posterior probabilities.
+# Returns results as a list with n.iter elements
+  # ARGUMENTS:
+    # x: vector of number of successes (# Paranthropus specimens)
+    # n: vector of number of trials (# total mammalian specimens)
+    # n.iter: number of bootstrap iterations
+    # silent: if FALSE, prints iteration number
+boot_data <- function(x, n, n.iter = 1000, silent = FALSE){
+  
+  boot.res <- vector(mode = "list", length = n.iter) # empty list to save results to
+  
+  for(i in seq_along(boot.res)){
+    
+    index <- sample.int(
+      length(x), 
+      size = length(x), 
+      replace = TRUE) # randomly choose index by which to resample sites
+    
+    x_boot <- x[index] # get resampled x
+    n_boot <- n[index] # get resampled n
+    
+    x_boot_spec <- numeric(length(x)) # empty vector to save bootstrapped specimens to
+    
+    for(j in seq_along(x_boot_spec)) x_boot_spec[j] <- 
+      rbinom(
+        n = 1, 
+        size = n_boot[j], 
+        prob = x_boot[j] / n_boot[j]) # for each bootstrapped x and n, resample x (number of specimens)
+    
+    boot.res[[i]] <- data.frame( # save bootstrapped results
+      x = x_boot_spec,
+      n = n_boot
+    )
+    
+    if(!silent) print(i)
+  }
+}
+
+
+# function for simulating number of Paranthropus 
+# specimens with known psi and lambda
   # ARGUMENTS:
     # n_sites: number of sites
     # n_mammSpec: vector of number of total mammalian specimens from each site
