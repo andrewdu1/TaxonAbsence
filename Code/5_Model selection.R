@@ -158,12 +158,12 @@ mle.res$ZI.BB <- c(
 ## Zero-inflated beta-binomial model (two parameters)
   # Argument param is a vector with three elements
     # First element is psi
-    # Second & third elements are beta-binomial parameters
+    # Second & third elements are beta-binomial parameters (alpha & beta)
 ZI.BB2.logL <- function(x, n, param){
   
   psi <- param[1]
-  m <- param[2]
-  s <- param[3]
+  m <- param[2] / (param[2] + param[3])
+  s <- param[2] + param[3]
   
   require(rmutil)
   
@@ -171,13 +171,13 @@ ZI.BB2.logL <- function(x, n, param){
 }
 
 ### use optim() to numerically estimate parameters
-ZI.BB2.fit <- optim(par = c(0.5, 0.001, 500), 
+ZI.BB2.fit <- optim(par = c(0.5, 1, 1), 
                    fn = ZI.BB2.logL,
                    method = "L-BFGS-B",
                    x = x,
                    n = n,
                    lower = c(1e-6, 1e-6, 1e-6),
-                   upper = c(1, 0.4, 1e10),
+                   upper = c(1, 1e10, 1e10),
                    control = list(
                      fnscale = -1
                    ))
