@@ -19,14 +19,15 @@ n <- d$Paran_nisp + d$NonParanMamm_nisp # mammalian NISP
 # create empty list to save model results to
 mle.res <- vector(
   mode = "list", 
-  length = 4)
+  length = 5)
 
 ## name list elements
 names(mle.res) <- c(
   "binom",
   "BB",
   "ZI.binom",
-  "ZI.BB"
+  "ZI.BB",
+  "ZI.BB2"
 )
 
 
@@ -118,7 +119,7 @@ mle.res$ZI.binom <- c(
 )
 
 
-## Zero-inflated beta-binomial model
+## Zero-inflated beta-binomial model (one parameter)
   # Argument param is a vector with two elements
     # First element is psi
     # Second element is lambda
@@ -151,6 +152,40 @@ ZI.BB.fit <- optim(par = c(0.5, 100),
 mle.res$ZI.BB <- c(
   ZI.BB.fit$value,
   length(ZI.BB.fit$par)
+)
+
+
+## Zero-inflated beta-binomial model (two parameters)
+  # Argument param is a vector with three elements
+    # First element is psi
+    # Second & third elements are beta-binomial parameters
+ZI.BB2.logL <- function(x, n, param){
+  
+  psi <- param[1]
+  m <- param[2]
+  s <- param[3]
+  
+  require(rmutil)
+  
+  return(sum(log((x == 0) * (1 - psi) + dbetabinom(x, n, m, s) * psi)))
+}
+
+### use optim() to numerically estimate parameters
+ZI.BB2.fit <- optim(par = c(0.5, 0.001, 500), 
+                   fn = ZI.BB2.logL,
+                   method = "L-BFGS-B",
+                   x = x,
+                   n = n,
+                   lower = c(1e-6, 1e-6, 1e-6),
+                   upper = c(1, 0.4, 1e10),
+                   control = list(
+                     fnscale = -1
+                   ))
+
+### save logL & k (# parameters)
+mle.res$ZI.BB2 <- c(
+  ZI.BB2.fit$value,
+  length(ZI.BB2.fit$par)
 )
 
 
