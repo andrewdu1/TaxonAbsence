@@ -18,16 +18,16 @@ x <- d$Paran_nisp # Paranthropus abundance
 n <- x + d$NonParanMamm_nisp # Total large mammalian abundance
 
 # Fit model using MLE
-mle.res <- ZI.BB.mle(
+ZI.BB.fit <- ZI.BB.mle(
   psi.start = 0.5,
   lambda.start = 100,
   x = x,
-  n = n,
-  hessian = FALSE)
+  n = n
+  )
 
 # Get out estimated parameters
-psi_hat <- mle.res["psi"]
-lambda_hat <- mle.res["lambda"]
+psi_hat <- ZI.BB.fit$par[1]
+lambda_hat <- ZI.BB.fit$par[2]
 
 # Calculate posterior probabilities 
 # (prob. Paranthropus is truly absent given estimated parameters and data)
@@ -41,7 +41,10 @@ d1 <- data.frame(
 
 d1 <- d1[d1$x == 0, ] # remove sites where Paranthropus is present
 
-post_prob.res <- post_prob(d1$n, psi_hat, lambda_hat)
+post_prob.res <- post_prob(
+  n = d1$n, 
+  psi = psi_hat, 
+  lambda = lambda_hat)
 
 post_prob.res1 <- data.frame(
   site = d1$site, 
@@ -53,24 +56,31 @@ post_prob.res1 <- data.frame(
 # bootstrap 95% CIs for hyperparameters & posterior probabilities
 set.seed(99) # for repeatability purposes
 
-boot.res <- boot_data( # bootstrap the data
+# bootstrap the data
+boot.res <- boot_data( 
   x = x,
   n = n,
   n.iter = 1000,
   silent = FALSE
 )
 
-mle.boot.res <- sapply(boot.res, function(i){ # estimate hyperparameters for each bootstrapped iteration
+# estimate hyperparameters for each bootstrapped iteration
+mle.boot.res <- sapply(boot.res, function(i){ 
   
-  ZI.BB.mle(
-    psi.start = 0.5,
-    lambda.start = 100,
+  mle.res <- ZI.BB.mle(
     x = i$x,
     n = i$n,
-    hessian = FALSE)
+    psi.start = 0.5,
+    lambda.start = 100
+  )
+  
+  param.hat <- mle.res$par
+  names(param.hat) <- c("psi", "lambda")
+  return(param.hat)
 })
 
-post_prob.boot.res <- apply(mle.boot.res, 2, function(i){ # calculate posterior probability for each bootstrapped iteration
+# calculate posterior probability for each bootstrapped iteration
+post_prob.boot.res <- apply(mle.boot.res, 2, function(i){ 
   
   post_prob(d1$n, i["psi"], i["lambda"])
 })
