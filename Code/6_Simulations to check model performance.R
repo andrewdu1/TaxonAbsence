@@ -88,8 +88,29 @@ BB.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through p
 # turn off cluster
 stopCluster(cl)
 
+# wrangle data in usable format
+BB.sim.res1 <- array(
+  dim = c(
+    length(psi.sim), 
+    length(lambda.sim), 
+    n.iter, 
+    2), # psi & lambda estimates
+  dimnames = list(
+    psi.sim,
+    lambda.sim,
+    seq_len(n.iter),
+    c("psi_hat", "lambda_hat")
+  ))
+
+for(i in seq_along(psi.sim)){
+  for(j in seq_along(lambda.sim)){
+    
+    BB.sim.res1[i, j, , ] <- BB.sim.res[[i]][[j]]
+  }
+}
+
 # save the simulation results.
-#saveRDS(BB.sim.res, file = "Results/BB sim results.rds")
+#saveRDS(BB.sim.res1, file = "Results/BB sim results.rds")
 
 
 # register the parallel backend
@@ -145,5 +166,30 @@ BB2.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through psi
 # turn off cluster
 stopCluster(cl)
 
+# wrangle data in usable format
+BB2.sim.res1 <- array(
+  dim = c(
+    length(psi.sim), 
+    length(alpha.sim), 
+    length(beta.sim),
+    n.iter, 
+    3), # psi, alpha, & beta estimates
+  dimnames = list(
+    psi.sim,
+    alpha.sim,
+    beta.sim,
+    seq_len(n.iter),
+    c("psi_hat", "alpha_hat", "beta_hat")
+  ))
+
+for(i in seq_along(psi.sim)){
+  for(j in seq_along(alpha.sim)){
+    for(k in seq_along(beta.sim)){
+      
+      BB2.sim.res1[i, j, k, , ] <- BB2.sim.res[[i]][[j]][[k]]
+    }
+  }
+}
+
 # save the simulation results.
-#saveRDS(BB2.sim.res, file = "Results/BB2 sim results.rds")
+#saveRDS(BB2.sim.res1, file = "Results/BB2 sim results.rds")
