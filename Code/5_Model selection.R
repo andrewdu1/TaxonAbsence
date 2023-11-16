@@ -70,4 +70,10 @@ AICc.res <- sapply(mle.res1, function(x){
 AICc_weights(AICc.res)
 
 # Save results
-saveRDS(list(AICc = AICc.res, AICc_w = AICc_weights(AICc.res)), file = "Results/Model selection results.rds")
+saveRDS(list(
+    logL = sapply(mle.res1, function(x) x$value),
+    k = sapply(mle.res1, function(x) length(x$par)),
+    AICc = AICc.res, 
+    AICc_w = AICc_weights(AICc.res)
+    ), 
+  file = "Results/Model selection results.rds")
