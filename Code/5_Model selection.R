@@ -68,3 +68,6 @@ AICc.res <- sapply(mle.res1, function(x){
 
 # Calculate AICc weights
 AICc_weights(AICc.res)
+
+# Save results
+saveRDS(list(AICc = AICc.res, AICc_w = AICc_weights(AICc.res)), file = "Results/Model selection results.rds")
