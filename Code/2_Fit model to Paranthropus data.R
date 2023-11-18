@@ -18,7 +18,7 @@ x <- d$Paran_nisp # Paranthropus abundance
 n <- x + d$NonParanMamm_nisp # Total large mammalian abundance
 
 # Fit model using MLE
-ZI.BB.fit <- ZI.BB.mle(
+ZI.BB2.fit <- ZI.BB2.mle(
   psi.start = 0.5,
   lambda.start = 100,
   x = x,
@@ -26,8 +26,8 @@ ZI.BB.fit <- ZI.BB.mle(
   )
 
 # Get out estimated parameters
-psi_hat <- ZI.BB.fit$par[1]
-lambda_hat <- ZI.BB.fit$par[2]
+psi_hat <- ZI.BB2.fit$par[1]
+lambda_hat <- ZI.BB2.fit$par[2]
 
 # Calculate posterior probabilities 
 # (prob. Paranthropus is truly absent given estimated parameters and data)
@@ -67,7 +67,7 @@ boot.res <- boot_data(
 # estimate hyperparameters for each bootstrapped iteration
 mle.boot.res <- sapply(boot.res, function(i){ 
   
-  mle.res <- ZI.BB.mle(
+  mle.res <- ZI.BB2.mle(
     x = i$x,
     n = i$n,
     psi.start = 0.5,

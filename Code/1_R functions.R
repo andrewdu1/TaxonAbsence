@@ -32,7 +32,7 @@ BBpmf <- function(x, n, lambda){
     # x: vector of number of successes (# Paranthropus specimens)
     # n: vector of number of trials (# total mammalian specimens)
     # param: two-element vector, where the first is psi and the second is lambda
-ZI.BB.logL <- function(x, n, param){
+ZI.BB2.logL <- function(x, n, param){
   
   psi <- param[1]
   lambda <- param[2]
@@ -50,10 +50,10 @@ ZI.BB.logL <- function(x, n, param){
     # x: vector of number of successes (# Paranthropus specimens)
     # n: vector of number of trials (# total mammalian specimens)
     # hessian: if TRUE, returns Hessian matrix
-ZI.BB.mle <- function(psi.start, lambda.start, x, n, hessian = FALSE){
+ZI.BB2.mle <- function(psi.start, lambda.start, x, n, hessian = FALSE){
   
   mle.res <- optim(par = c(psi.start, lambda.start), 
-                   fn = ZI.BB.logL,
+                   fn = ZI.BB2.logL,
                    method = "L-BFGS-B",
                    x = x,
                    n = n,
@@ -287,7 +287,7 @@ ZI.binom.mle <- function(x, n, psi.start, p.start, psi.bounds, p.bounds){
     # x: vector of number of successes (# Paranthropus specimens)
     # n: vector of number of trials (# total mammalian specimens)
     # param: two-element vector c(psi, lambda)
-ZI.BB.logL <- function(x, n, param){
+ZI.BB2.logL <- function(x, n, param){
   
   psi <- param[1]
   lambda <- param[2]
@@ -306,10 +306,10 @@ ZI.BB.logL <- function(x, n, param){
     # n: vector of number of trials (# total mammalian specimens)
     # psi.start: initial guess for psi
     # lambda.start: initial guess for lambda
-ZI.BB.mle <- function(x, n, psi.start, lambda.start){
+ZI.BB2.mle <- function(x, n, psi.start, lambda.start){
   
   return(optim(par = c(psi.start, lambda.start), 
-               fn = ZI.BB.logL,
+               fn = ZI.BB2.logL,
                method = "L-BFGS-B",
                x = x,
                n = n,
@@ -326,7 +326,7 @@ ZI.BB.mle <- function(x, n, psi.start, lambda.start){
     # x: vector of number of successes (# Paranthropus specimens)
     # n: vector of number of trials (# total mammalian specimens)
     # param: three-element vector c(psi, alpha, beta)
-ZI.BB2.logL <- function(x, n, param){
+ZI.BB3.logL <- function(x, n, param){
   
   psi <- param[1]
   m <- param[2] / (param[2] + param[3])
@@ -344,10 +344,10 @@ ZI.BB2.logL <- function(x, n, param){
     # psi.start: initial guess for psi
     # alpha.start: initial guess for alpha
     # beta.start: initial guess for beta
-ZI.BB2.mle <- function(x, n, psi.start, alpha.start, beta.start){
+ZI.BB3.mle <- function(x, n, psi.start, alpha.start, beta.start){
   
   return(optim(par = c(psi.start, alpha.start, beta.start), 
-               fn = ZI.BB2.logL,
+               fn = ZI.BB3.logL,
                method = "L-BFGS-B",
                x = x,
                n = n,

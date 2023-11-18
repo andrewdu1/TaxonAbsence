@@ -45,7 +45,7 @@ registerDoParallel(cl)
 # Two-parameter zero-inflated beta-binomial model
 set.seed(100)
 
-BB.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through p
+BB2.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through p
   
   foreach(lambda.iter = lambda.sim) %:% # iterate through lambda
   
@@ -66,22 +66,22 @@ BB.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through p
         beta_param = lambda.iter)
     } # in case some simulations have zero Paranthropus NISP across all sites 
 
-    ZI.BB.fit <- 
+    ZI.BB2.fit <- 
       try(
-        ZI.BB.mle(
+        ZI.BB2.mle(
           x = x.sim$n_ParanSpec, 
           n = n, 
           psi.start = 0.5,
           lambda.start = 100), 
         silent = TRUE) # try() identifies whether model fitting results in an error (i.e., non-finite log-likelihood)
     
-    if(class(ZI.BB.fit) == "try-error"){
+    if(class(ZI.BB2.fit) == "try-error"){
       
       return(c(NA, NA)) # if error, return NAs
       
     } else {
       
-      return(ZI.BB.fit$par) # return vector of estimated parameters
+      return(ZI.BB2.fit$par) # return vector of estimated parameters
     }
   }
 
@@ -89,7 +89,7 @@ BB.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through p
 stopCluster(cl)
 
 # wrangle data in usable format
-BB.sim.res1 <- array(
+BB2.sim.res1 <- array(
   dim = c(
     length(psi.sim), 
     length(lambda.sim), 
@@ -105,12 +105,12 @@ BB.sim.res1 <- array(
 for(i in seq_along(psi.sim)){
   for(j in seq_along(lambda.sim)){
     
-    BB.sim.res1[i, j, , ] <- BB.sim.res[[i]][[j]]
+    BB2.sim.res1[i, j, , ] <- BB2.sim.res[[i]][[j]]
   }
 }
 
 # save the simulation results.
-#saveRDS(BB.sim.res1, file = "Results/BB sim results.rds")
+#saveRDS(BB2.sim.res1, file = "Results/BB2 sim results.rds")
 
 
 # register the parallel backend
@@ -119,7 +119,7 @@ registerDoParallel(cl)
 # Three-parameter zero-inflated beta-binomial model
 set.seed(100)
 
-BB2.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through psi
+BB3.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through psi
   
   foreach(alpha.iter = alpha.sim) %:% # iterate through alpha
   
@@ -142,9 +142,9 @@ BB2.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through psi
         beta_param = c(alpha.iter, beta.iter))
     } # in case some simulations have zero Paranthropus NISP across all sites 
     
-    ZI.BB2.fit <- 
+    ZI.BB3.fit <- 
       try(
-        ZI.BB2.mle(
+        ZI.BB3.mle(
           x = x.sim$n_ParanSpec,
           n = n,
           psi.start = 0.5,
@@ -153,13 +153,13 @@ BB2.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through psi
         ), 
         silent = TRUE) # try() identifies whether model fitting results in an error (i.e., non-finite log-likelihood)
     
-    if(class(ZI.BB2.fit) == "try-error"){
+    if(class(ZI.BB3.fit) == "try-error"){
       
       return(c(NA, NA, NA)) # if error, return NAs
       
     } else {
       
-      return(ZI.BB2.fit$par) # return vector of estimated parameters
+      return(ZI.BB3.fit$par) # return vector of estimated parameters
     }
   }
 
@@ -167,7 +167,7 @@ BB2.sim.res <- foreach(psi.iter = psi.sim) %:% # iterate through psi
 stopCluster(cl)
 
 # wrangle data in usable format
-BB2.sim.res1 <- array(
+BB3.sim.res1 <- array(
   dim = c(
     length(psi.sim), 
     length(alpha.sim), 
@@ -186,10 +186,10 @@ for(i in seq_along(psi.sim)){
   for(j in seq_along(alpha.sim)){
     for(k in seq_along(beta.sim)){
       
-      BB2.sim.res1[i, j, k, , ] <- BB2.sim.res[[i]][[j]][[k]]
+      BB3.sim.res1[i, j, k, , ] <- BB3.sim.res[[i]][[j]][[k]]
     }
   }
 }
 
 # save the simulation results.
-#saveRDS(BB2.sim.res1, file = "Results/BB2 sim results.rds")
+#saveRDS(BB3.sim.res1, file = "Results/BB3 sim results.rds")

@@ -27,8 +27,8 @@ names(mle.res) <- c(
   "binom",
   "BB",
   "ZI.binom",
-  "ZI.BB",
-  "ZI.BB2"
+  "ZI.BB2",
+  "ZI.BB3"
 )
 
 # Fit models
@@ -42,13 +42,13 @@ mle.res$ZI.binom <- ZI.binom.mle(
   psi.bounds = c(1e-6, 1),
   p.bounds = c(1e-4, 0.02)
 )
-mle.res$ZI.BB <- ZI.BB.mle(
+mle.res$ZI.BB2 <- ZI.BB2.mle(
   x, 
   n, 
   psi.start = 0.5, 
   lambda.start = 100
 )
-mle.res$ZI.BB2 <- ZI.BB2.mle(
+mle.res$ZI.BB3 <- ZI.BB3.mle(
   x,
   n,
   psi.start = 0.5,
@@ -56,10 +56,10 @@ mle.res$ZI.BB2 <- ZI.BB2.mle(
   beta.start = 5
 )
 
-# NB: ZI.BB2 gave nonsensical parameter estimates (i.e., psi_hat = 1),
+# NB: ZI.BB3 gave nonsensical parameter estimates (i.e., psi_hat = 1),
 # so we excluded this model from the model selection procedure, and 
 # we explored its behavior via simulations
-mle.res1 <- mle.res[names(mle.res) != "ZI.BB2"]
+mle.res1 <- mle.res[names(mle.res) != "ZI.BB3"]
 
 # Calculate AICc
 AICc.res <- sapply(mle.res1, function(x){
