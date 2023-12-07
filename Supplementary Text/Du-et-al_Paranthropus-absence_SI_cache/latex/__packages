@@ -1,6 +1,9 @@
-RColorBrewer
-rmutil
-foreach
-iterators
-doParallel
 base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+RColorBrewer
+ggplot2
