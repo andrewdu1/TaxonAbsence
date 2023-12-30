@@ -23,7 +23,7 @@ Inferring whether *Paranthropus* was truly absent at a site is difficult because
 We are ultimately interested in estimating the probability of each of these two possibilities, conditional on not finding a *Paranthropus* specimen after sampling $n$ mammalian specimens at a given site. 
 To accomplish this, we first fit a zero-inflated beta-binomial model to the data using maximum likelihood estimation. 
 This model can be viewed as a mixture model wherein each of the two previously mentioned outcomes is modeled with a different probability distribution called a *mixture component*. 
-As we will see, our model, along with Bayes' rule, will allow us to compute the probability that a given site was generated from possibility (A) or (B), conditional on sampling $n$ mammalian specimens without finding *Paranthropus*, and thus estimate the probability that *Paranthropus* was truly absent from a given site or has not been sampled yet. 
+As we will see, our model, along with Bayes' theorem, will allow us to compute the probability that a given site was generated from possibility (A) or (B), conditional on sampling $n$ mammalian specimens without finding *Paranthropus*, and thus estimate the probability that *Paranthropus* was truly absent from a given site or has not been sampled yet. 
 
 
 ## Derivation
@@ -87,8 +87,8 @@ Combining scenario (A), where *Paranthropus* is truly absent at the $i$th site a
 
 \begin{subequations}
   \begin{align} 
-      P(p_i=k | Z_i = 0) = \begin{cases} 
-        1 & \text{if } k = 0 \\
+      P(p_i=w | Z_i = 0) = \begin{cases} 
+        1 & \text{if } w = 0 \\
         0 & \text{otherwise}
      \end{cases}
      \label{pi|Z=0}
@@ -129,7 +129,7 @@ Recalling that $p_i$ is distributed according to $Beta(1, 1 + \lambda)$, we have
     \label{X|Z=1}
 \end{align}
 
-In Bayesian statistics, this commonly used distribution is referred to as the *beta-binomial distribution* and has the following probability mass function (PMF):
+This commonly used distribution is referred to as the *beta-binomial distribution* and has the following probability mass function (PMF):
 
 \begin{align}
     P(X_i = x | Z_i = 1) = f_B(x_i;n_i,\lambda) = {n_i\choose x_i} \frac{B(x_i + 1, n_i - x_i + 1 + \lambda)}{B(1, 1 + \lambda)},
@@ -162,40 +162,71 @@ Furthermore, we are interested in using these parameter estimates to infer the l
 In other words, we would like to assess the probability that a given site has *Paranthropus* truly present or not, conditional on observations from the site and parameter estimates in our model (which are informed by data from all sites).
 To estimate the parameters ($\psi$, $\lambda$), we use a method called *maximum likelihood estimation*.
 Intuitively, this method selects the parameter values that will make the data most probable, with larger probabilities indicating more likely parameter estimates [@wang_principles_2010]. 
-Using the estimated parameter values, data, and Bayes' rule (see next section), we can estimate the probability that $Z_i = 1$, conditional on the parameter estimates and data, which is the conditional probability that *Paranthropus* was truly present at the site; the complement of this probability is the conditional probability that *Paranthropus* was truly absent from the $i$th site. 
+Using the estimated parameter values, data, and Bayes' theorem (see next section), we can estimate the probability that $Z_i = 1$, conditional on the parameter estimates and data, which is the conditional probability that *Paranthropus* was truly present at the site; the complement of this probability is the conditional probability that *Paranthropus* was truly absent from the $i$th site. 
 We note that the case that is most interesting is when no *Paranthropus* specimens have yet been observed at the given site (i.e., $X_i = 0$).
 To do all this, we operate in the framework of likelihood and define a *likelihood function*.
 
 A likelihood function quantifies information about model parameters that is contained in the data [@wang_adaptive_2016].
-It is numerically equivalent to the *joint probability* of the data given the parameters, so to get the likelihood function, we multiply the probability of the data by itself $N$ times, where $N$ is sample size [@wang_principles_2010]: e.g., $L(\psi, \lambda | X) = \prod_{i}^{N} P(X_i | \psi, \lambda)$. 
+It is numerically equivalent to the *joint probability* of the data given the parameters, so to get the likelihood function, we multiply the probability of the data by itself $N$ times, where $N$ is sample size [@wang_principles_2010]: e.g., $L(\psi, \lambda | X) = \prod_{i=1}^{N} P(X_i | \psi, \lambda)$. 
 For our study, the probability of the data is given by Equation \ref{P_X}, so our likelihood function is defined as:
 
 \begin{align}
-    L(\psi, \lambda | X) = P(X | \psi, \lambda) = \prod_{i}^{N} I(x_i = 0)(1 - \psi) + f_B(x_i; n_i, \lambda) \psi.
+    L(\psi, \lambda | X) = P(X | \psi, \lambda) = \prod_{i=1}^{N} I(x_i = 0)(1 - \psi) + f_B(x_i; n_i, \lambda) \psi.
     \label{likelihood}
 \end{align}
 
-We then use the L-BFGS-B optimization algorithm [@byrd_limited_1995] to find the parameter values $(\psi, \lambda)$ that maximizes the likelihood function (Equation \ref{likelihood}); more accurately, we work with the log transformation of Equation \ref{likelihood} for analytical tractability.
+We then use the L-BFGS-B optimization algorithm [@byrd_limited_1995] to find the parameter values $(\psi, \lambda)$ that maximize the likelihood function (Equation \ref{likelihood}). In practice, we work with the log transformation of Equation \ref{likelihood} for analytical tractability.
 
 
-## Bayes' rule
+## Bayes' theorem
 
-Once the $\psi$ and $\lambda$ parameters are estimated, we use Bayes' rule to compute our main probability of interest: the posterior probability that *Paranthropus* was truly absent at the $i$th site (i.e., $Z_i = 0$), given the estimated parameters and data.
-This probability equals zero for those sites where *Paranthropus* is observed to be present, so we focus on deriving the posterior probability equation for those sites where *Paranthropus* is currently observed to be absent:
+For this subsection, we first provide a brief introduction to Bayes' theorem and what the equation aims to accomplish, with respect to our research question of interest.
+We then show how we use Bayes' theorem to derive our main probability of interest: the probability that *Paranthropus* was truly absent at a given site, conditional on the estimated parameters and data.
+
+### Introduction to Bayes' theorem
+
+In scientific inference, we understand that a process(es) generates a pattern(s) (i.e., data), and we ultimately want to learn something about the generative process from the resulting data.
+In Bayesian inference, processes are described with models and their unobserved quantities (e.g., latent variables, parameters), and we learn something about these unobserved quantities of interest from observed data [@hobbs_bayesian_2015].
+For example, whether *Paranthropus* was truly absent or present at a given site is an unobserved quantity (i.e., latent variable), and we want to learn something about this latent variable at each site, given the observed data (i.e., sampling $X_i$ number of *Paranthropus* specimens after sampling $n_i$ number of mammalian specimens).
+Equations \ref{X|Z=0} and \ref{beta-binom} tell us how the data are generated, given that we know (or assume) the true state of the latent variable at a given site, i.e., $P(X_i|Z_i)$.
+However, we want our direction of inference to go in the opposite direction: we want to transpose $P(X_i|Z_i)$ to get $P(Z_i|X_i)$, i.e., we want to infer the latent variable from the observed data.
+Bayes' theorem tells us how to transpose conditional probabilities, using the basic algebraic rules of conditional probability:
+
+\begin{equation}
+    P(Z_i|X_i) = \frac{P(X_i|Z_i) P(Z_i)}{P(X_i)}.
+\label{bayes}
+\end{equation}
+
+Thus, based on this transposition of conditional probabilities (Equation \ref{bayes}), Bayes' theorem enables us to infer something about unobserved processes of interest (e.g., latent variables, parameters) from the observed data. 
+
+Explaining each component of Equation \ref{bayes}, $P(Z_i|X_i)$ is the *posterior probability*, $P(X_i|Z_i)$ is the *likelihood*, $P(Z_i)$ is the *prior probability*, and $P(X_i)$ is the *marginal distribution of the data*.
+The likelihood connects observed data with unobserved quantities in the model, while the prior probability summarizes what we know about the unobserved quantities before our study is conducted.
+For our model, the parameter determining the prior distribution, $\psi$ (Equation \ref{bernoulli}), is estimated from the data, so our model is an empirical Bayes one [@carlin_bayes_2000].
+The marginal distribution of the data serves as a normalizing factor, ensuring that the area under the posterior probability curve equals one.
+This means that the posterior probability distribution is a true probability density/mass function, and we can apply to it the rules and intuitions associated with probability theory.
+
+### Applying Bayes' theorem to our research question
+
+Once our model's $\psi$ and $\lambda$ parameters are estimated (Section \ref{estim}), we use Bayes' theorem to compute our main probability of interest: the posterior probability that *Paranthropus* was truly absent at the $i$th site (i.e., $Z_i = 0$), given the estimated parameters and data.
+This probability equals zero for those sites where *Paranthropus* is observed to be present, so we focus on deriving the posterior probability equation for those sites where *Paranthropus* is currently observed to be absent.
+Fleshing out Equation \ref{bayes} by including additional data ($n_i$) and the estimated parameters ($\hat{\psi}, \hat{\lambda}$):
 
 \begin{equation}
 \begin{aligned}
-    P(Z_i = 0 | x_i = 0, n_i, \hat{\psi}, \hat{\lambda}) &= \frac{P(X_i = 0 | Z_i = 0, n_i, \hat{\psi}, \hat{\lambda}) P(Z_i = 0 | n_i, \hat{\psi}, \hat{\lambda})}{P(X_i = 0 | n_i, \hat{\psi}, \hat{\lambda})} \\
-               &= \frac{I(x_i = 0) (1 - \hat{\psi})}{I(x_i = 0) (1 - \hat{\psi}) + f_B(x_i = 0; n_i, \hat{\lambda}) \hat{\psi}} \\
-               &= \frac{1 \times (1 - \hat{\psi})}{1 \times (1 - \hat{\psi}) + \frac{\Gamma(1) \Gamma(n_i + 1 + \hat{\lambda})}{\Gamma(n_i + 2 + \hat{\lambda})} \frac{\Gamma(2 + \hat{\lambda})}{\Gamma(1) \Gamma(1 + \hat{\lambda})} \hat{\psi}} \\
+    P(Z_i = 0 | X_i = 0, n_i, \hat{\psi}, \hat{\lambda}) &= \frac{P(X_i = 0 | Z_i = 0, n_i, \hat{\psi}, \hat{\lambda}) P(Z_i = 0 | n_i, \hat{\psi}, \hat{\lambda})}{P(X_i = 0 | n_i, \hat{\psi}, \hat{\lambda})} \\
+               &= \frac{1 \times (1 - \hat{\psi})}{I(X_i = 0) (1 - \hat{\psi}) + f_B(0; n_i, \hat{\lambda}) \hat{\psi}} \\
+               &= \frac{(1 - \hat{\psi})}{1 \times (1 - \hat{\psi}) + \frac{\Gamma(1) \Gamma(n_i + 1 + \hat{\lambda})}{\Gamma(n_i + 2 + \hat{\lambda})} \frac{\Gamma(2 + \hat{\lambda})}{\Gamma(1) \Gamma(1 + \hat{\lambda})} \hat{\psi}} \\
                &= \frac{1 - \hat{\psi}}{1 - \hat{\psi} + \frac{(n_i + \hat{\lambda})!}{(n_i + 1 + \hat{\lambda})!} \frac{(1 + \hat{\lambda})!}{\lambda!} \hat{\psi}} \\
                &= \frac{1 - \hat{\psi}}{1 - \hat{\psi} + \frac{1 + \hat{\lambda}}{n_i +1 + \hat{\lambda}} \hat{\psi}}.
 \end{aligned}
 \label{post_prob}
 \end{equation}
 
-We then plug in our estimated parameters $(\hat{\psi}, \hat{\lambda})$ and data for the $i$th site (i.e., the number of sampled mammalian specimens, $n_i$) into Equation \ref{post_prob} to get our posterior probability of interest.
-The complement of this probability---the posterior probability that *Paranthropus* was truly present at a site given the estimated parameters and data---can be calculated as $P(Z_i = 1 | x_i = 0, n_i, \hat{\psi}, \hat{\lambda}) = 1 - P(Z_i = 0 | x_i = 0, n_i, \hat{\psi}, \hat{\lambda})$ (Equation \ref{post_prob}).
+In Equation \ref{post_prob} going from Lines 1 to 2, the likelihood, $P(X_i = 0 | Z_i = 0, n_i, \hat{\psi}, \hat{\lambda})$, equals one because the probability that we sample zero *Paranthropus* specimens at a given site where it is truly absent ($Z_i=0$) equals one.
+The equation for the prior, $P(Z_i = 0 | n_i, \hat{\psi}, \hat{\lambda})$, is given by Equation \ref{bernoulli}, and the equation for the marginal distribution of the data, $P(X_i = 0 | n_i, \hat{\psi}, \hat{\lambda})$, is given by Equation \ref{P_X}.
+
+With Equation \ref{post_prob}, we plug in our estimated parameters $(\hat{\psi}, \hat{\lambda})$ and data for the $i$th site (i.e., the number of sampled mammalian specimens, $n_i$) into Equation \ref{post_prob} to get our posterior probability of interest.
+The complement of this probability---the posterior probability that *Paranthropus* was truly present at a site given the estimated parameters and data---can be calculated as $P(Z_i = 1 | X_i = 0, n_i, \hat{\psi}, \hat{\lambda}) = 1 - P(Z_i = 0 | X_i = 0, n_i, \hat{\psi}, \hat{\lambda})$ (Equation \ref{post_prob}).
 
 
 ## Quantifying uncertainty in the parameter estimates and posterior probabilities
@@ -211,7 +242,7 @@ We computed 95% confidence intervals for each sampling distribution using the `q
 
 \section{Model selection} \label{model_select}
 
-To assess our model's goodness of fit and whether it is overly complex (e.g., too many parameters), we compared our model to others using the small-sample, bias-corrected Akaike Information Criterion (AIC~*c*~).
+To assess our model's goodness of fit and whether it is overly complex (e.g., too many parameters), we compared our model to others using the small-sample, bias-corrected Akaike Information Criterion (AIC~*c*~) [@burnham_model_2002].
 The AIC~*c*~ formula is:
 
 \begin{align}
@@ -428,7 +459,7 @@ for(psi_i in seq_along(psi.sim)){
 }
 ```
 
-```{r, echo = FALSE, warning = FALSE, fig.height = 8, fig.cap = "Simulation results showing the two-parameter, zero-inflated beta-binomial model's ability to estimate $\\psi$ for various values of $\\psi$ and $\\lambda$. The horizontal dashed lines indicate true values of $\\psi$, while the diamonds indicate the average estimated $\\psi$ values. \\label{fig:ZI-BB2_psi}"}
+```{r, echo = FALSE, warning = FALSE, fig.height = 8, cache = TRUE, fig.cap = "Simulation results showing the two-parameter, zero-inflated beta-binomial model's ability to estimate $\\psi$ for various values of $\\psi$ and $\\lambda$. The horizontal dashed lines indicate true values of $\\psi$, while the diamonds indicate the average estimated $\\psi$ values. \\label{fig:ZI-BB2_psi}"}
 # load ggplot
 library(ggplot2)
 
@@ -465,7 +496,7 @@ ggplot(BB2.sim.psi, aes(x = factor(lambda), y = estimate)) +
     strip.text = element_text(size = 12))
 ```
 
-```{r echo=FALSE, fig.height=8, warning=FALSE, fig.cap = "Simulation results showing the two-parameter, zero-inflated beta-binomial model's ability to estimate $\\lambda$ for various values of $\\psi$ and $\\lambda$. The horizontal dashed lines indicate true values of $\\lambda$, while the diamonds indicate the average estimated $\\lambda$ values. \\label{fig:ZI-BB2_lambda}"}
+```{r echo=FALSE, fig.height=8, warning=FALSE, cache = TRUE, fig.cap = "Simulation results showing the two-parameter, zero-inflated beta-binomial model's ability to estimate $\\lambda$ for various values of $\\psi$ and $\\lambda$. The horizontal dashed lines indicate true values of $\\lambda$, while the diamonds indicate the average estimated $\\lambda$ values. \\label{fig:ZI-BB2_lambda}"}
 # lambda_hat plot
 BB2.sim.lambda <- BB2.sim[BB2.sim$parameter == "lambda_hat", ]
 
@@ -513,7 +544,7 @@ All in all, the ZI-BB2 model performs well when the simulated parameter values a
 Simulation results show that almost all ZI-BB3 parameter estimates are biased (Figures \ref{fig:ZI-BB3_psi_alpha}--\ref{fig:ZI-BB3_beta_alpha}).
 For $\hat{\psi}$, this bias is proximately caused by the bimodal nature of its sampling distribution: one mode is located at 1.0, while the other is located near $\psi$'s true value (Figures \ref{fig:ZI-BB3_psi_alpha} & \ref{fig:ZI-BB3_psi_beta}) (the bimodal sampling distribution of $\hat{\psi}$, or any parameter, indicates the existence of local optima in the likelihood function).
 The magnitude of $\hat{\psi}$'s bias is directly related to the number of simulated iterations where $\hat{\psi} = 1.0$ (Figures \ref{fig:ZI-BB3_psi_alpha} & \ref{fig:ZI-BB3_psi_beta}).
-The number of simulated iterations where $\hat{\psi} = 1.0$ is itself caused by those iterations where there are many simulated zeros, i.e., number of zero *Paranthropus* specimens across sites.
+The number of simulated iterations where $\hat{\psi} = 1.0$ is itself caused by those iterations where there are many simulated zeros, i.e., zero *Paranthropus* specimens across sites ($X_i = 0$ for most sites).
 Many simulated zeros occur when $\psi$ is smaller, which produces more true absences across sites, and when $\alpha$ is smaller and $\beta$ is larger, which produces more false absences across sites (e.g., expected *Paranthropus* sampling probability, $E(p_i)$, equals $\alpha / (\alpha + \beta)$); these parameter values cause the greatest degree of bias in $\hat{\psi}$ (Figures \ref{fig:ZI-BB3_psi_alpha} & \ref{fig:ZI-BB3_psi_beta}).
 With lots of simulated zeros across sites, the model sometimes interprets *all* zeros, incorrectly, as false absences: $\hat{\psi} = 1.0$ implies that *Paranthropus* is truly present at *all* sites, and the false absences are modeled with smaller $\hat{\alpha}$ and larger $\hat{\beta}$. 
 This phenomenon also explains the sampling distribution modes at $\hat{\alpha} < 0.1$ (Figures \ref{fig:ZI-BB3_alpha_psi} & \ref{fig:ZI-BB3_alpha_beta}) and $\hat{\beta} > 10,000$ (Figures \ref{fig:ZI-BB3_beta_psi} & \ref{fig:ZI-BB3_beta_alpha}) when $\psi$ is small, $\alpha$ is small, and $\beta$ is large. 
@@ -588,7 +619,7 @@ for(psi_i in seq_along(psi.sim)){
 }
 ```
 
-```{r, echo = FALSE, warning = FALSE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\psi$ for various values of $\\psi$ and $\\alpha$. The horizontal dashed lines indicate true values of $\\psi$, while the diamonds indicate the average estimated $\\psi$ values. \\label{fig:ZI-BB3_psi_alpha}"}
+```{r, echo = FALSE, warning = FALSE, fig.height = 8, cache = TRUE, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\psi$ for various values of $\\psi$ and $\\alpha$. The horizontal dashed lines indicate true values of $\\psi$, while the diamonds indicate the average estimated $\\psi$ values. \\label{fig:ZI-BB3_psi_alpha}"}
 # psi_hat plot
 BB3.sim.psi <- BB3.sim[BB3.sim$parameter == "psi_hat", ]
 
@@ -623,7 +654,7 @@ ggplot(BB3.sim.psi, aes(x = factor(A), y = estimate)) +
     strip.text = element_text(size = 12))
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\psi$ for various values of $\\psi$ and $\\beta$. The horizontal dashed lines indicate true values of $\\psi$, while the diamonds indicate the average estimated $\\psi$ values. \\label{fig:ZI-BB3_psi_beta}"}
+```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\psi$ for various values of $\\psi$ and $\\beta$. The horizontal dashed lines indicate true values of $\\psi$, while the diamonds indicate the average estimated $\\psi$ values. \\label{fig:ZI-BB3_psi_beta}"}
 ### psi ~ beta
 ggplot(BB3.sim.psi, aes(x = factor(B), y = estimate)) + 
   geom_violin(trim = FALSE, fill = "lightpink3") +
@@ -650,7 +681,7 @@ ggplot(BB3.sim.psi, aes(x = factor(B), y = estimate)) +
     strip.text = element_text(size = 12))
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\alpha$ for various values of $\\alpha$ and $\\psi$. The horizontal dashed lines indicate true values of $\\alpha$, while the diamonds indicate the average estimated $\\alpha$ values. \\label{fig:ZI-BB3_alpha_psi}"}
+```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\alpha$ for various values of $\\alpha$ and $\\psi$. The horizontal dashed lines indicate true values of $\\alpha$, while the diamonds indicate the average estimated $\\alpha$ values. \\label{fig:ZI-BB3_alpha_psi}"}
 # alpha_hat plot
 BB3.sim.alpha <- BB3.sim[BB3.sim$parameter == "alpha_hat", ]
 
@@ -686,7 +717,7 @@ ggplot(BB3.sim.alpha, aes(x = factor(psi), y = estimate)) +
     strip.text = element_text(size = 12))
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\alpha$ for various values of $\\alpha$ and $\\beta$. The horizontal dashed lines indicate true values of $\\alpha$, while the diamonds indicate the average estimated $\\alpha$ values. \\label{fig:ZI-BB3_alpha_beta}"}
+```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\alpha$ for various values of $\\alpha$ and $\\beta$. The horizontal dashed lines indicate true values of $\\alpha$, while the diamonds indicate the average estimated $\\alpha$ values. \\label{fig:ZI-BB3_alpha_beta}"}
 ### alpha ~ beta
 ggplot(BB3.sim.alpha, aes(x = factor(B), y = estimate)) + 
   geom_violin(trim = FALSE, fill = "seagreen3") +
@@ -714,7 +745,7 @@ ggplot(BB3.sim.alpha, aes(x = factor(B), y = estimate)) +
     strip.text = element_text(size = 12))
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\beta$ for various values of $\\beta$ and $\\psi$. The horizontal dashed lines indicate true values of $\\beta$, while the diamonds indicate the average estimated $\\beta$ values. \\label{fig:ZI-BB3_beta_psi}"}
+```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\beta$ for various values of $\\beta$ and $\\psi$. The horizontal dashed lines indicate true values of $\\beta$, while the diamonds indicate the average estimated $\\beta$ values. \\label{fig:ZI-BB3_beta_psi}"}
 # beta_hat plot
 BB3.sim.beta <- BB3.sim[BB3.sim$parameter == "beta_hat", ]
 
@@ -751,7 +782,7 @@ ggplot(BB3.sim.beta, aes(x = factor(psi), y = estimate)) +
     strip.text = element_text(size = 12))
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\beta$ for various values of $\\beta$ and $\\alpha$. The horizontal dashed lines indicate true values of $\\beta$, while the diamonds indicate the average estimated $\\beta$ values. \\label{fig:ZI-BB3_beta_alpha}"}
+```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE, fig.height = 8, fig.cap = "Simulation results showing the three-parameter, zero-inflated beta-binomial model's ability to estimate $\\beta$ for various values of $\\beta$ and $\\alpha$. The horizontal dashed lines indicate true values of $\\beta$, while the diamonds indicate the average estimated $\\beta$ values. \\label{fig:ZI-BB3_beta_alpha}"}
 ### beta ~ alpha
 ggplot(BB3.sim.beta, aes(x = factor(A), y = estimate)) + 
   geom_violin(trim = FALSE, fill = "mediumpurple3") +
