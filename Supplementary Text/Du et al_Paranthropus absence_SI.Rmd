@@ -389,7 +389,8 @@ We conduct the simulations as follows:
 The output is a vector of 0s and 1s, where the length of the vector is the total number of sites, 0 denotes true *Paranthropus* absence, 1 denotes true *Paranthropus* presence, and the proportion of 1s equals $\psi$ on average. 
 
 2) For those sites that have *Paranthropus* (i.e., $Z_i = 1$), we simulate *Paranthropus* abundances (i.e., $X_i$) as a random draw from the beta-binomial distribution, given the observed number of mammalian specimens at each site and either a prespecified $\lambda$ value (Equation \ref{beta-binom}) or prespecified $\alpha$ and $\beta$ values (right-hand side of plus sign in Equation \ref{ZI-BB3}, without the $\psi$). 
-We do this using the `rbetabinom` function in the `rmutil` package [@R-rmutil]. 
+We do this using the `rbetabinom` function in the `rmutil` package [@R-rmutil].
+For those simulated iterations that resulted in zero *Paranthropus* specimens across all sites, we re-ran simulations until there was at least one *Paranthropus* specimen across all sites.
 
 3) The appropriate zero-inflated beta-binomial model is fit to the simulated data, generating parameter estimates. 
 
