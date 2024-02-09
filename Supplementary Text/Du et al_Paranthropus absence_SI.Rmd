@@ -185,29 +185,25 @@ We then show how we use Bayes' theorem to derive our main probability of interes
 
 ### Introduction to Bayes' theorem
 
-In scientific inference, we understand that a process(es) generates a pattern(s) (i.e., data), and we ultimately want to learn something about the generative process from the resulting data.
-In Bayesian inference, processes are described with models and their unobserved quantities (e.g., latent variables, parameters), and we learn something about these unobserved quantities of interest from observed data [@hobbs_bayesian_2015].
-For example, whether *Paranthropus* was truly absent or present at a given site is an unobserved quantity (i.e., latent variable), and we want to learn something about this latent variable at each site, given the observed data (i.e., sampling $X_i$ number of *Paranthropus* specimens after sampling $n_i$ number of mammalian specimens).
-Equations \ref{X|Z=0} and \ref{beta-binom} tell us how the data are generated, given that we know (or assume) the true state of the latent variable at a given site, i.e., $P(X_i|Z_i)$.
-However, we want our direction of inference to go in the opposite direction: we want to transpose $P(X_i|Z_i)$ to get $P(Z_i|X_i)$, i.e., we want to infer the latent variable from the observed data.
-Bayes' theorem tells us how to transpose conditional probabilities, using the basic algebraic rules of conditional probability:
+Bayes' theorem is a mathematical equation that allows one to compute the probability of an event conditioned on information which may impact that event. 
+In this work, we are interested in computing the probability that *Paranthropus* was truly absent at a site ($Z_i$), conditioned on the fact that $X_i$ *Paranthropus* specimens have been found after sampling $n_i$ mammalian specimens. 
+We call this probability the *posterior probability* and write it as $P(Z_i|X_i)$. 
+However, it is much more mathematically tractable to compute the probability of sampling $X_i$ *Paranthropus* specimens conditioned on whether *Paranthropus* was present or not $P(X_i|Z_i)$; this probability is called the *likelihood*. 
+Bayes' theorem allows us to express $P(Z_i|X_i)$ in terms of $P(X_i|Z_i)$:
 
 \begin{equation}
     P(Z_i|X_i) = \frac{P(X_i|Z_i) P(Z_i)}{P(X_i)}.
 \label{bayes}
 \end{equation}
 
-Thus, based on this transposition of conditional probabilities (Equation \ref{bayes}), Bayes' theorem enables us to infer something about unobserved processes of interest (e.g., latent variables, parameters) from the observed data. 
-
-Explaining each component of Equation \ref{bayes}, $P(Z_i|X_i)$ is the *posterior probability*, $P(X_i|Z_i)$ is the *likelihood*, $P(Z_i)$ is the *prior probability*, and $P(X_i)$ is the *marginal distribution of the data*.
-The likelihood connects observed data with unobserved quantities in the model, while the prior probability summarizes what we know about the unobserved quantities before our study is conducted.
+In this equation, $P(Z_i)$ is called the *prior* and reflects our initial belief, before seeing any evidence, that *Paranthropus* was present at any site chosen at random. 
 For our model, the parameter determining the prior distribution, $\psi$ (Equation \ref{bernoulli}), is estimated from the data, so our model is an empirical Bayes one [@carlin_bayes_2000].
-The marginal distribution of the data serves as a normalizing factor, ensuring that the area under the posterior probability curve equals one.
-This means that the posterior probability distribution is a true probability density/mass function, and we can apply to it the rules and intuitions associated with probability theory.
+Bayes' theorem has given rise to an entire branch of statistical inference called *Bayesian inference*. 
+For a full treatment, see Gelman et al. [-@gelman_bayes_2014].
 
 ### Applying Bayes' theorem to our research question
 
-Once our model's $\psi$ and $\lambda$ parameters are estimated (Section \ref{estim}), we use Bayes' theorem to compute our main probability of interest: the posterior probability that *Paranthropus* was truly absent at the $i$th site (i.e., $Z_i = 0$), given the estimated parameters and data.
+Once our model's $\psi$ and $\lambda$ parameters are estimated (Section \ref{estim}), we use Bayes' theorem (Eq. \ref{bayes}) to compute our main probability of interest: the posterior probability that *Paranthropus* was truly absent at the $i$th site (i.e., $Z_i = 0$), given the estimated parameters and data.
 This probability equals zero for those sites where *Paranthropus* is observed to be present, so we focus on deriving the posterior probability equation for those sites where *Paranthropus* is currently observed to be absent.
 Fleshing out Equation \ref{bayes} by including additional data ($n_i$) and the estimated parameters ($\hat{\psi}, \hat{\lambda}$):
 
@@ -225,7 +221,7 @@ Fleshing out Equation \ref{bayes} by including additional data ($n_i$) and the e
 In Equation \ref{post_prob} going from Lines 1 to 2, the likelihood, $P(X_i = 0 | Z_i = 0, n_i, \hat{\psi}, \hat{\lambda})$, equals one because the probability that we sample zero *Paranthropus* specimens at a given site where it is truly absent ($Z_i=0$) equals one.
 The equation for the prior, $P(Z_i = 0 | n_i, \hat{\psi}, \hat{\lambda})$, is given by Equation \ref{bernoulli}, and the equation for the marginal distribution of the data, $P(X_i = 0 | n_i, \hat{\psi}, \hat{\lambda})$, is given by Equation \ref{P_X}.
 
-With Equation \ref{post_prob}, we plug in our estimated parameters $(\hat{\psi}, \hat{\lambda})$ and data for the $i$th site (i.e., the number of sampled mammalian specimens, $n_i$) into Equation \ref{post_prob} to get our posterior probability of interest.
+With Equation \ref{post_prob}, we plug in our estimated parameters $(\hat{\psi}, \hat{\lambda})$ and data for the $i$th site (i.e., the number of sampled mammalian specimens, $n_i$) to get our posterior probability of interest.
 The complement of this probability---the posterior probability that *Paranthropus* was truly present at a site given the estimated parameters and data---can be calculated as $P(Z_i = 1 | X_i = 0, n_i, \hat{\psi}, \hat{\lambda}) = 1 - P(Z_i = 0 | X_i = 0, n_i, \hat{\psi}, \hat{\lambda})$ (Equation \ref{post_prob}).
 
 
